@@ -1,0 +1,227 @@
+.uploader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 5vh;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    .container {
+        position: relative;
+        display: block;
+        border-radius: 2px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+        height: 50vh;
+        width: 60vw;
+        overflow: hidden;
+        transition: all 0.2s ease;
+        background-color: rgba(255, 255, 255, 0.9);
+        .nav-bar {
+            display: flex;
+            position: relative;
+            height: 3rem;
+            justify-content: space-between;
+            ul {
+                padding-left: 0;
+                position: relative;
+                display: inline-block;
+                text-align: center;
+                width: 50%;
+                margin: 0;
+                padding: 1rem 0;
+                font-size: 1rem;
+                color: #6a6a6a;
+                cursor: pointer;
+            }
+            .nav-visual {
+                position: absolute;
+                display: block;
+                width: 50%;
+                border-top: 2px solid #b3b3b3;
+                top: 100%;
+                left: 0;
+                transition: left 0.5s ease;
+            }
+        }
+        .uploader-file-container {
+            width: 100%;
+            height: calc(100% - 3rem);
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            left: 0px;
+            transition: left 0.5s ease;
+            .upload-icon {
+                font-size: 4rem;
+                color: #0080db;
+                cursor: default;
+            }
+            .tip-text {
+                font-weight: 300;
+                font-size: 1.6rem;
+                color: #6a6a6a;
+                margin-top: 2rem;
+            }
+            .tip-text-small {
+                font-weight: 300;
+                font-size: 0.8rem;
+                color: #6a6a6a;
+                margin-top: 0.5rem;
+            }
+            .upload-button {
+                height: 3.6rem;
+                width: 16rem;
+                background-color: #0080db;
+                border-radius: 6px;
+                font-size: 1.2rem;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 1.5rem;
+                cursor: pointer;
+                transition: background-color 0.2s ease;
+            }
+            .upload-button:hover {
+                background-color: #3e9bdd;
+            }
+        }
+        .uploader-text-container {
+            width: 100%;
+            height: calc(100% - 3rem);
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            transition: left 0.5s ease;
+            left: 100%;
+            .input-area {
+                height: calc(100% - 5rem);
+                width: 100%;
+                padding: 1rem 2rem;
+                box-sizing: border-box;
+                overflow-y: auto;
+                word-wrap: break-word;
+                word-break: break-all;
+            }
+            .input-area:focus {
+                outline: none;
+            }
+            .input-area:empty:not(:focus):before {
+                content: attr(placeholder);
+                color: grey;
+            }
+            .upload-button {
+                height: 3.6rem;
+                width: 16rem;
+                background-color: #0080db;
+                border-radius: 6px;
+                font-size: 1.2rem;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                margin-bottom: 1rem;
+                transition: background-color 0.2s ease;
+            }
+            .upload-button:hover {
+                background-color: #3e9bdd;
+            }
+        }
+    }
+    .container.enlarge {
+        transform: scale(1.2);
+        box-shadow: 0 1px 20px rgba(0, 0, 0, 0.3);
+        .uploader-file-container {
+            * {
+                pointer-events: none;
+            }
+        }
+    }
+    .container.right {
+        .nav-bar {
+            .nav-visual {
+                left: 50%;
+            }
+        }
+        .uploader-text-container {
+            left: 0;
+        }
+        .uploader-file-container {
+            left: -100%;
+        }
+    }
+
+    .progress-container {
+        position: relative;
+        display: block;
+        border-radius: 2px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+        height: 50vh;
+        width: 60vw;
+        overflow: hidden;
+        transition: all 0.2s ease;
+        background-color: rgba(255, 255, 255, 0.9);
+
+        .inner-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            .progress-number {
+                font-weight: 300;
+                font-size: 3rem;
+            }
+            .progress-number::after {
+                content: '%';
+            }
+            .file-size {
+                font-weight: 300;
+                margin-top: 0.5rem;
+                span:first-child::after {
+                    content: '/';
+                }
+            }
+            .file-name {
+                margin-top: 1rem;
+                font-weight: 300;
+            }
+            .cancel-button {
+                height: 3.6rem;
+                width: 16rem;
+                background-color: #dd3e46;
+                border-radius: 6px;
+                font-size: 1.2rem;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                margin-top: 2rem;
+                transition: background-color 0.2s ease;
+            }
+            .cancel-button:hover {
+                background-color: #e05b62;
+            }
+        }
+    }
+
+    .result-container {
+        position: relative;
+        display: block;
+        height: 50vh;
+        width: 60vw;
+        overflow: hidden;
+        transition: all 0.2s ease;
+        .inner-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    }
+}

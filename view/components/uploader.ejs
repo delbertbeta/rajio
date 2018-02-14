@@ -1,3 +1,17 @@
 <div class="uploader">
-    
+    <div id="uploaderContainer" class="container">
+        <nav class="nav-bar">
+            <ul id="fileLabel">File</ul>
+            <ul id="textLabel">Text</ul>
+            <div class="nav-visual"></div>
+        </nav>
+        <%- include uploader_file.ejs -%>
+        <%- include uploader_text.ejs -%>
+    </div>
+    <div id="progressContainer" class="progress-container hide">
+        <%- include uploader_progress.ejs -%>
+    </div>
+    <div id="resultContainer" class="result-container hide">
+        <%- include uploader_result.ejs -%>
+    </div>
 </div>

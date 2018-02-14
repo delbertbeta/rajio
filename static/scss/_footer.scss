@@ -1,0 +1,20 @@
+.footer {
+    width: 100%;
+    height: 8rem;
+    padding: 2rem 5%;
+    box-sizing: border-box;
+    position: relative;
+    .footer-text {
+        color: #6a6a6a;
+        font-size: 0.8rem;
+        vertical-align: middle;
+        a {
+            color: inherit;
+            text-decoration: underline;
+        }
+        .red-icon {
+            color: #ff7373;
+            vertical-align: top;
+        }
+    }
+}

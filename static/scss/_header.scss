@@ -1,0 +1,30 @@
+.header {
+    width: 100%;
+    height: 8rem;
+    padding: 2rem 5%;
+    box-sizing: border-box;
+    position: relative;
+    .header-icon {
+        vertical-align: middle;
+        font-size: 4rem;
+        color: #6a6a6a;
+    }
+    .header-title {
+        vertical-align: middle;
+        font-size: 4rem;
+        color: #6a6a6a;
+    }
+    .header-expaination {
+        // position: absolute;
+        // right: 5%;
+        // bottom: 2rem;
+        display: inline-block;
+        position: relative;
+        vertical-align: bottom;
+        margin-bottom: 0.6rem;
+        margin-left: 0.5rem;
+        font-size: 1.5rem;
+        color: #838383;
+        font-weight: 300;
+    }
+}
