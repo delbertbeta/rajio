@@ -8,7 +8,32 @@
     const cancelButton = document.getElementById('cancelButton');
     const progressNumber = document.getElementById('progressNumber');
     const resultContainer = document.getElementById('resultContainer');
+    const urlBox = document.getElementById('urlBox');
+    const copyButton = document.getElementById('copyButton');
+    const timesChoice = document.getElementById('timesChoice');
+    const dayChoice = document.getElementById('dayChoice');
+    const goBackButton = document.getElementById('goBackButton');
+    const deleteButton = document.getElementById('deleteButton');
 
+    timesOptions = `<li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>10</li>
+                    <li>20</li>
+                    <li>50</li>
+                    <li>unlimited</li>`;
+
+    dayOptions = `<li>1 hour</li>
+                    <li>12 hours</li>
+                    <li>1 day</li>
+                    <li>7 days</li>
+                    <li>1 month</li>
+                    <li>0.5 years</li>
+                    <li>1 year</li>
+                    <li>unlimited days</li>`;
+    
     fileLabel.addEventListener('click', () => {
         uploaderContainer.classList.remove('right');
     })
@@ -45,6 +70,46 @@
         animateStatus(progressContainer, uploaderContainer);
     })
 
+    urlBox.addEventListener('focus', (event) => {
+        event.target.select();
+    })
+
+    let copiedTimeout = -1;
+    copyButton.addEventListener('click', (event) => {
+        event.target.textContent = 'Copied!';
+        urlBox.focus();
+        document.execCommand('copy');
+        if (copiedTimeout !== -1) {
+            clearTimeout(copiedTimeout);
+        }
+        copiedTimeout = setTimeout(() => {
+            event.target.textContent = 'Copy';
+            copiedTimeout = -1;
+        }, 5000);
+    })
+
+    timesChoice.addEventListener('click', function (event) {
+        showSelection(event, timesOptions, (option) => {
+            timesChoice.children[0].textContent = option.value;
+            console.log(option.index);
+        })
+    })
+
+    dayChoice.addEventListener('click', function(event) {
+        showSelection(event, dayOptions, (option) => {
+            dayChoice.children[0].textContent = option.value;
+            console.log(option.index);
+        })
+    })
+
+    goBackButton.addEventListener('click', () => {
+        animateStatus(resultContainer, uploaderContainer);
+    })
+
+    deleteButton.addEventListener('click', () => {
+        animateStatus(resultContainer, uploaderContainer);
+    })
+
     function animateStatus(from, to) {
         from.classList.remove('hide');
         from.classList.remove('rotateIn');
@@ -75,5 +140,35 @@
             }
         }
         requestAnimationFrame(callback);
+    }
+
+    function showSelection(event, option, callback) {
+        let optionDom = document.createElement('ul');
+        optionDom.classList.add('options');
+        optionDom.classList.add('fadeIn');
+        optionDom.innerHTML = option;
+        optionDom.style.left = event.clientX - 75 + 'px';
+        optionDom.style.top = event.clientY / 4 + 'px';
+        let optionMask = document.createElement('div');
+        optionMask.classList.add('option-mask');
+        document.body.appendChild(optionMask);
+        let closeOption = () => {
+            document.body.removeChild(optionMask);
+            optionDom.classList.add('fadeOut');
+            setTimeout(() => {
+                document.body.removeChild(optionDom);
+            }, 200)
+        };
+        optionMask.addEventListener('click', closeOption)
+        document.body.appendChild(optionDom);
+        optionDom.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            callback({
+                value: event.target.textContent,
+                index: Array.prototype.indexOf.call(optionDom.children, event.target)
+            });
+            closeOption();
+        })
     }
 })()

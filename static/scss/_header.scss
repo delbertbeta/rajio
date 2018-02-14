@@ -27,4 +27,26 @@
         color: #838383;
         font-weight: 300;
     }
+    .history-entry {
+        position: absolute;
+        display: flex;
+        border-radius: 4px;
+        background-color: rgba(0, 0, 0, 0);
+        height: 2.5rem;
+        width: 2.5rem;
+        transition: background-color 0.2s ease;
+        justify-content: center;
+        align-items: center;
+        right: 5%;
+        bottom: 1.5rem;
+        
+        color: #6a6a6a;
+        cursor: pointer;
+        i {
+            font-size: 2rem;
+        }
+    }
+    .history-entry:hover {
+        background-color: rgba(0, 0, 0, 0.2);
+    }
 }
