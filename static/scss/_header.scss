@@ -39,7 +39,6 @@
         align-items: center;
         right: 5%;
         bottom: 1.5rem;
-        
         color: #6a6a6a;
         cursor: pointer;
         i {
@@ -48,5 +47,62 @@
     }
     .history-entry:hover {
         background-color: rgba(0, 0, 0, 0.2);
+    }
+}
+
+.history-panel {
+    position: fixed;
+    height: 30vh;
+    width: 660px;
+    right: 5%;
+    top: 7rem;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    padding: 1rem;
+    box-sizing: border-box;
+    overflow-y: auto;
+    table {
+        width: 100%;
+        table-layout: fixed;
+        
+        tr {
+            font-weight: 300;
+            position: relative;
+            height: 2rem;
+            th {
+                font-weight: normal;
+            }
+            th:first-child {
+                text-align: left;
+            }
+            td:first-child {
+                text-align: left;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+            td {
+                text-align: center;
+                i {
+                    color: #6a6a6a;
+                }
+            }
+        }
+        tr:first-child {
+            color: #6a6a6a;
+            border-bottom: 1px solid #838383;
+        }
+    }
+    .empty-tip {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        left: 0;
+        color: #6a6a6a;
     }
 }

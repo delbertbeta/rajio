@@ -14,6 +14,8 @@
     const dayChoice = document.getElementById('dayChoice');
     const goBackButton = document.getElementById('goBackButton');
     const deleteButton = document.getElementById('deleteButton');
+    const historyPanel = document.getElementById('historyPanel');
+    const historyEntry = document.getElementById('historyEntry');
 
     timesOptions = `<li>1</li>
                     <li>2</li>
@@ -110,6 +112,25 @@
         animateStatus(resultContainer, uploaderContainer);
     })
 
+    historyEntry.addEventListener('click', () => {
+        historyPanel.classList.add('fadeIn');
+        historyPanel.classList.remove('hide');
+        let optionMask = document.createElement('div');
+        optionMask.classList.add('option-mask');
+        document.body.appendChild(optionMask);
+        let closeOption = () => {
+            document.body.removeChild(optionMask);
+            historyPanel.classList.add('fadeOut');
+            historyPanel.classList.remove('fadeIn');
+            setTimeout(() => {
+                historyPanel.classList.remove('fadeOut');
+                historyPanel.classList.add('hide');
+            }, 500)
+        };
+        optionMask.addEventListener('click', closeOption)
+
+    })
+
     function animateStatus(from, to) {
         from.classList.remove('hide');
         from.classList.remove('rotateIn');
@@ -157,7 +178,7 @@
             optionDom.classList.add('fadeOut');
             setTimeout(() => {
                 document.body.removeChild(optionDom);
-            }, 200)
+            }, 500)
         };
         optionMask.addEventListener('click', closeOption)
         document.body.appendChild(optionDom);

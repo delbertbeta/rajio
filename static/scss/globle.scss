@@ -101,12 +101,12 @@ body {
 }
 
 .fadeIn {
-    animation: 0.2s ease-in 0s 1 both fadeIn;
+    animation: 0.5s cubic-bezier(.99,.01,.01,.99) 0s 1 both fadeIn;
 }
 
 @keyframes fadeIn {
     from {
-        transform: translateY(10px);
+        transform: translateY(20px);
         opacity: 0;
     }
     to {
@@ -116,7 +116,7 @@ body {
 }
 
 .fadeOut {
-    animation: 0.2s ease-in 0s 1 both fadeOut;
+    animation: 0.5s cubic-bezier(.99,.01,.01,.99) 0s 1 both fadeOut;
 }
 
 @keyframes fadeOut {
@@ -125,7 +125,7 @@ body {
         opacity: 1;
     }
     to {
-        transform: translateY(10px);
+        transform: translateY(20px);
         opacity: 0;
     }
 }
