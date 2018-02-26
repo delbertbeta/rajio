@@ -11,7 +11,8 @@ html {
   background-size: 20rem;
   background-repeat: no-repeat;
   background-position: bottom 5% right 5%;
-  font-family: sans-serif; }
+  font-family: sans-serif;
+  overflow: hidden; }
 
 body {
   margin: 0;
@@ -99,7 +100,9 @@ body {
   right: 5%;
   top: 7rem;
   background-color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  border: 1px solid #838383;
   z-index: 2;
   padding: 1rem;
   box-sizing: border-box;

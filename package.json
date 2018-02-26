@@ -20,11 +20,16 @@
   },
   "homepage": "https://github.com/delbertbeta/rajio#readme",
   "dependencies": {
+    "hat": "^0.0.3",
     "koa": "^2.4.1",
     "koa-better-serve": "^2.0.7",
+    "koa-body": "^2.5.0",
     "koa-ejs": "^4.1.0",
-    "koa-route": "^3.2.0",
+    "koa-router": "^7.4.0",
     "koa-send": "^4.1.2",
-    "koa.sass": "^1.0.3"
+    "koa.sass": "^1.0.3",
+    "log4js": "^2.5.3",
+    "sequelize": "^4.33.4",
+    "sqlite3": "^3.1.13"
   }
 }
