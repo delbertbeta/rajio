@@ -28,7 +28,7 @@ const route = async function (ctx, next) {
         downloadCode: hat(16, 16),
         fileName: tempInfo.fileName
     }
-    ctx.response.body = obj;
+    ctx.response.body = ctx.body.files;
     // uploader.fields('file')(ctx, async (ctx, next) => {
     //     let obj = {
     //         id: tempInfo.id,
