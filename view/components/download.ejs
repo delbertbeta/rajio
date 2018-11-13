@@ -1,0 +1,19 @@
+<div class="uploader">
+  <div class="download-container">
+    <div class="inner-container">
+      <div class="title">
+        Hello, Download <%= item.fileName %> (<%= item.fileSize %>)
+      </div>
+      <div class="explanation">
+        Your friend has just shared a file with you via rajio. If there is time or download limit, this file will be
+        deleted after that is triggered.
+      </div>
+      <div class="url">
+        <input id="urlBox" class="url-box" readonly="readonly" value="https://rajio.delbertbeta.cc/s/<%= item.downloadCode %>" />
+        <div id="copyButton" class="copy-botton">Copy</div>
+      </div>
+      <img class="download" src="/static/img/download.svg"/>
+      <a id="goBackButton" download="<%= item.fileName %>" href="https://rajio.delbertbeta.cc/d/<%= item.downloadCode %>/<%= item.fileName %>" class="go-back-button">Download</a>
+    </div>
+  </div>
+</div>

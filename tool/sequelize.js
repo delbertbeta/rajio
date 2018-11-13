@@ -30,6 +30,9 @@ const rajio = sequelize.define('rajio', {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW
     },
+    fileSize: {
+        type: Sequelize.INTEGER
+    },
     timeLimit: {
         type: Sequelize.DATE,
         allowNull: true

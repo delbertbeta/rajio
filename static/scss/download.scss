@@ -1,0 +1,181 @@
+@import '_footer';
+@import '_header';
+
+a:hover,
+a:visited,
+a:link,
+a:active {
+    text-decoration: none;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+    background-image: url(/static/img/texture.png);
+    background-size: 20rem;
+    background-repeat: no-repeat;
+    background-position: bottom 5% right 5%;
+    font-family: sans-serif;
+    overflow: hidden;
+}
+
+body {
+    margin: 0;
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.choices {
+    color: #0080db;
+    cursor: pointer;
+    position: relative;
+    svg {
+        // height: 20px;
+        // width: 20px;
+        // vertical-align: top;
+    }
+
+}
+
+.options {
+    position: fixed;
+    z-index: 2;
+    width: 150px;
+    background-color: white;
+    padding: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    li {
+        padding: 1rem 0;
+        text-align: center;
+        list-style-type: none;
+        cursor: pointer;
+        color: #0080db;
+        font-weight: 300;
+    }
+}
+.options.fadeOut {
+    pointer-events: none;
+}
+
+.option-mask {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+
+.hide {
+  display: none !important;
+}
+
+.uploader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 5vh;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  .result-container, .download-container {
+    position: relative;
+    display: block;
+    height: 60vh;
+    width: 60vw;
+    transition: all 0.2s ease;
+    .inner-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100%;
+        .title {
+            font-weight: 200;
+            font-size: 32px;
+            color: #353535;
+            text-align: center;  
+        }
+        .explanation {
+            margin-top: 12px;
+            font-size: 14px;
+            color: #888888;
+            text-align: center;
+        }
+        .qrcode {
+            width: 200px; // box-shadow: 0 0px 4px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s ease;
+        }
+        .qrcode:hover {
+            box-shadow: 0 0px 10px rgba(0, 0, 0, 0.4);
+            transform: scale(1.2);
+        }
+        .url {
+            overflow: hidden;
+            height: 3rem;
+            width: 500px;
+            border-radius: 6px;
+            border: 1px solid #0080db;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.8rem;
+            .url-box {
+                display: inline-block;
+                width: 400px;
+                height: 100%;
+                border: none;
+                color: #6a6a6a;
+                padding-left: 10px;
+                padding-right: 10px;
+                font-size: 1rem;
+                font-family: sans-serif;
+                font-weight: 300;
+            }
+            .copy-botton {
+                display: inline-block;
+                height: 100%;
+                width: 100px;
+                background-color: #0080db;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                transition: background-color 0.5s ease;
+            }
+            .copy-botton:hover {
+                background-color: #3e9bdd;
+            }
+        }
+        .download {
+            height: 160px;
+            width: 160px;
+        }
+        .go-back-button {
+            margin-top: 1.2rem;
+            height: 3.6rem;
+            width: 16rem;
+            background-color: #0080db;
+            border-radius: 6px;
+            font-size: 1.2rem;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            margin-bottom: 0.5rem;
+            transition: background-color 0.2s ease;
+        }
+        .go-back-button:hover {
+            background-color: #3e9bdd;
+        }
+        .delete-button {
+            margin: 0;
+            font-size: 0.8rem;
+            color: #6a6a6a;
+            cursor: pointer;
+        }
+    }
+  }
+}

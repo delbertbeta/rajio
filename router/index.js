@@ -1,8 +1,5 @@
-const send = require('koa-send');
-
-module.exports = async (ctx, next) => {
+module.exports = async (ctx) => {
     await ctx.render('index', {
-        layout: 'index'
+        share: false
     });
-    await next();
 }

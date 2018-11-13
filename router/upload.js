@@ -23,6 +23,7 @@ const route = async function (ctx, next) {
         downloadLimit: null,
         timeLimit: null,
         downloadCode: hat(16, 16),
+        fileSize: ctx.request.files.file.size,
         fileName: ctx.request.files.file.name
     });
     ctx.response.body = data;

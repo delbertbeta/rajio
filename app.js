@@ -3,7 +3,7 @@ const router = require('./router/router');
 
 const path = require('path');
 
-const render = require('koa-ejs');
+const render = require('koa-views');
 const serveStatic = require('koa-better-serve');
 const serveSass = require('koa.sass');
 
@@ -21,13 +21,12 @@ const app = new Koa();
 //   return;
 // });
 
-render(app, {
-  root: path.join(__dirname, 'view'),
-  layout: false,
-  viewExt: 'ejs',
-  cache: false,
-  debug: false
-});
+app.use(render(__dirname + '/view', {
+  map: {
+    html: 'underscore'
+  },
+  extension: 'ejs'
+}));
 
 app.use(router.routes())
   .use(router.allowedMethods());

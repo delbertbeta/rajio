@@ -1,12 +1,23 @@
 const Router = require('koa-router');
 const router = new Router();
-const koaBody = require('koa-body');
-const hat = require('hat');
-
+const download = require('./download');
 const index = require('./index');
 const upload = require('./upload');
+const share = require('./share')
 
-router.get('/', index);
+router.get('/', index)
+
 router.post('/api/upload', upload.koaBody, upload.route);
+// router.get('/s/:id')
 
-module.exports = router;
+router.param('id', (id, ctx, next) => {
+  ctx.id = id
+  return next()
+}).get('/d/:id/:fileName', download.route)
+
+router.param('id', (id, ctx, next) => {
+  ctx.id = id
+  return next()
+}).get('/s/:id', share)
+
+module.exports = router

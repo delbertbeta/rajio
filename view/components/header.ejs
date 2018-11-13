@@ -2,6 +2,6 @@
     <i class="material-icons header-icon">radio</i>
     <span class="header-title">rajio</span>
     <span class="header-expaination">a way to share your files</span>
-    <span id="historyEntry" class="history-entry"><i class="material-icons">history</i></span>
+    <% if (!share) { %><span id="historyEntry" class="history-entry"><i class="material-icons">history</i></span><% } %>
     <%- include history-panel.ejs -%>
 </header>

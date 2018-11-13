@@ -331,25 +331,25 @@ body {
         transition: background-color 0.2s ease; }
       .uploader .progress-container .inner-container .cancel-button:hover {
         background-color: #e05b62; }
-  .uploader .result-container, .uploader .download-container {
+  .uploader .result-container {
     position: relative;
     display: block;
     height: 60vh;
     width: 60vw;
     transition: all 0.2s ease; }
-    .uploader .result-container .inner-container, .uploader .download-container .inner-container {
+    .uploader .result-container .inner-container {
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
       height: 100%; }
-      .uploader .result-container .inner-container .qrcode, .uploader .download-container .inner-container .qrcode {
+      .uploader .result-container .inner-container .qrcode {
         width: 200px;
         transition: all 0.5s ease; }
-      .uploader .result-container .inner-container .qrcode:hover, .uploader .download-container .inner-container .qrcode:hover {
+      .uploader .result-container .inner-container .qrcode:hover {
         box-shadow: 0 0px 10px rgba(0, 0, 0, 0.4);
         transform: scale(1.2); }
-      .uploader .result-container .inner-container .url, .uploader .download-container .inner-container .url {
+      .uploader .result-container .inner-container .url {
         overflow: hidden;
         height: 3rem;
         width: 500px;
@@ -358,7 +358,7 @@ body {
         display: flex;
         justify-content: space-between;
         margin-top: 0.5rem; }
-        .uploader .result-container .inner-container .url .url-box, .uploader .download-container .inner-container .url .url-box {
+        .uploader .result-container .inner-container .url .url-box {
           display: inline-block;
           width: 400px;
           height: 100%;
@@ -369,7 +369,7 @@ body {
           font-size: 1rem;
           font-family: sans-serif;
           font-weight: 300; }
-        .uploader .result-container .inner-container .url .copy-botton, .uploader .download-container .inner-container .url .copy-botton {
+        .uploader .result-container .inner-container .url .copy-botton {
           display: inline-block;
           height: 100%;
           width: 100px;
@@ -380,15 +380,15 @@ body {
           align-items: center;
           cursor: pointer;
           transition: background-color 0.5s ease; }
-        .uploader .result-container .inner-container .url .copy-botton:hover, .uploader .download-container .inner-container .url .copy-botton:hover {
+        .uploader .result-container .inner-container .url .copy-botton:hover {
           background-color: #3e9bdd; }
-      .uploader .result-container .inner-container .function-line, .uploader .download-container .inner-container .function-line {
+      .uploader .result-container .inner-container .function-line {
         font-weight: 300;
         line-height: 1rem;
         font-size: 1rem;
         text-align: center;
         margin: 1rem 0 2rem 0; }
-      .uploader .result-container .inner-container .go-back-button, .uploader .download-container .inner-container .go-back-button {
+      .uploader .result-container .inner-container .go-back-button {
         height: 3.6rem;
         width: 16rem;
         background-color: #0080db;
@@ -401,9 +401,9 @@ body {
         cursor: pointer;
         margin-bottom: 0.5rem;
         transition: background-color 0.2s ease; }
-      .uploader .result-container .inner-container .go-back-button:hover, .uploader .download-container .inner-container .go-back-button:hover {
+      .uploader .result-container .inner-container .go-back-button:hover {
         background-color: #3e9bdd; }
-      .uploader .result-container .inner-container .delete-button, .uploader .download-container .inner-container .delete-button {
+      .uploader .result-container .inner-container .delete-button {
         margin: 0;
         font-size: 0.8rem;
         color: #6a6a6a;
