@@ -3,32 +3,29 @@ const logger = require('../tool/log4js');
 const sequelize = require('../tool/sequelize');
 const hat = require('hat');
 const koaBody = require('koa-body');
-
-let tempInfo = {};
+const path = require('path')
 
 let koaBodyFunc = koaBody({
     multipart: true,
     formidable: {
-        uploadDir: 'data/upload/',
+        uploadDir: path.resolve('../data/upload/'),
         maxFieldsSize: 128 * 1024 * 1024,
         onFileBegin: (name, file) => {
-            tempInfo.fileName = file.name;
-            tempInfo.id = hat();
-            file.path = tempInfo.id
-            console.log(tempInfo);
+            file.path = './data/upload/' + hat()
         }
     }
 })
 
 const route = async function (ctx, next) {
-    let obj = {
-        id: tempInfo.id,
-        downloadLimit: -1,
-        timeLimit: -1,
+    let data = await sequelize.create({
+        id: ctx.request.files.file.path.split('/').pop(),
+        downloadCount: 0,
+        downloadLimit: null,
+        timeLimit: null,
         downloadCode: hat(16, 16),
-        fileName: tempInfo.fileName
-    }
-    ctx.response.body = ctx.body.files;
+        fileName: ctx.request.files.file.name
+    });
+    ctx.response.body = data;
     // uploader.fields('file')(ctx, async (ctx, next) => {
     //     let obj = {
     //         id: tempInfo.id,
@@ -58,9 +55,6 @@ const route = async function (ctx, next) {
     //     // }
     //     // )
     // })
-
-
-
 };
 
 module.exports = {
