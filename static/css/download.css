@@ -60,13 +60,12 @@
 .history-panel {
   position: fixed;
   height: 30vh;
-  width: 660px;
+  width: 720px;
   right: 5%;
   top: 7rem;
   background-color: white;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0px 16px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
-  border: 1px solid #838383;
   z-index: 2;
   padding: 1rem;
   box-sizing: border-box;
@@ -186,7 +185,7 @@ body {
         color: #353535;
         text-align: center; }
       .uploader .result-container .inner-container .explanation, .uploader .download-container .inner-container .explanation {
-        width: 50%;
+        width: 60%;
         margin-top: 12px;
         font-size: 16px;
         color: #505050;

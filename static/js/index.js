@@ -24,6 +24,8 @@
     const deleteButton = document.getElementById('deleteButton')
     const historyPanel = document.getElementById('historyPanel')
     const historyEntry = document.getElementById('historyEntry')
+    const historyEmpty = document.getElementById('historyEmpty')
+    const historyTable = document.getElementById('historyTable')
 
     timesOptions = `<li>1</li>
                     <li>2</li>
@@ -43,6 +45,14 @@
                     <li>0.5 years</li>
                     <li>1 year</li>
                     <li>unlimited days</li>`;
+
+    // Read localStorage
+    let uploads = localStorage['uploads']
+    if (!uploads) {
+        uploads = []
+    } else {
+        uploads = JSON.parse(uploads)
+    }
     
     fileLabel.addEventListener('click', () => {
         uploaderContainer.classList.remove('right');
@@ -230,6 +240,10 @@
         animateStatus(from, errorContainer)
     }
 
+    function saveUploads () {
+        localStorage['uploads'] = JSON.stringify(uploads)
+    }
+
     function fileHandle(file) {
         if (file.size > data.maxFileSize) {
             changeError(uploaderContainer, 'File is larger than limit (' + data.prettiedMaxFileSize + ').')
@@ -262,6 +276,9 @@
                 finished.textContent = filesize(file.size)
                 updateProgress(origin, 100, 800)
                 showResult(r.data)
+                uploads.push(r.data)
+                saveUploads()
+                refreshHistory()
                 setTimeout(() => {
                     animateStatus(progressContainer, resultContainer)
                 }, 1000)
@@ -281,4 +298,39 @@
         qr.make()
         qrcodeImg.src = qr.createDataURL(10, 20)
     }
+    
+    function refreshHistory() {
+        if (uploads.length === 0) {
+            historyEmpty.classList.remove('hide')
+        } else {
+            historyEmpty.classList.add('hide')
+        }
+        // const arrow = document.createElement('svg')
+        // arrow.setAttribute('height', '16')
+        // arrow.setAttribute('width', '16')
+        // arrow.innerHTML = '<polygon points="4 9 8.5 14 13 9" fill="#0080db"></polygon>'
+        
+        while (historyTable.children.length > 1){
+            // debugger;
+            historyTable.removeChild(historyTable.lastChild)
+        }
+        
+        const trs = []
+        
+        uploads.forEach(v => {
+            const tr = document.createElement('tr')
+            tr.innerHTML = `
+            <td>${v.fileName}</td>
+            <td><span>${v.downloadCount}</span>/<span class="choices"><span>${v.downloadLimit === null ? 'unlimited' : v.downloadLimit}</span><span><svg width="16" height="16"><polygon points="4 9 8.5 14 13 9" fill="#0080db"></polygon></svg></span></span></td>
+            <td><span>${moment(v.uploadTime).format('YYYY-MM-DD HH:mm')}</span>/<span class="choices"><span>${v.timeLimit === null ? 'unlimited' : moment(v.timeLimit).format('YYYY-MM-DD HH:mm')}</span><span><svg width="16" height="16"><polygon points="4 9 8.5 14 13 9" fill="#0080db"></polygon></svg></span></span></td></td>
+            <td><i class="material-icons" style="color: #e05b62">close</i></td>
+            `
+            trs.push(tr)
+        })
+
+        historyTable.append(...trs)
+    }
+
+    refreshHistory()
+    
 })()

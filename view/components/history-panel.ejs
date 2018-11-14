@@ -1,17 +1,19 @@
 <div id="historyPanel" class="history-panel hide">
     <table>
-        <tr>
-            <th width="140">Name</th>
-            <th width="150">Download</th>
-            <th width="240">Upload Time</th>
-            <th width="60">Delete</th>
-        </tr>
-        <tr>
-            <td>test.txt</td>
-            <td><span>0</span>/<span class="choices"><span>unlimited</span><span><svg width="16" height="16"><polygon points="4 9 8.5 14 13 9" fill="#0080db"></polygon></svg></span></span></td>
-            <td><span>2018-02-15 00:19</span>/<span class="choices"><span>unlimited</span><span><svg width="16" height="16"><polygon points="4 9 8.5 14 13 9" fill="#0080db"></polygon></svg></span></span></td></td>
-            <td><i class="material-icons">close</i></td>
-        </tr>
+        <tbody id="historyTable">
+            <tr>
+                <th width="140">Name</th>
+                <th width="150">Download</th>
+                <th width="320">Upload Time</th>
+                <th width="60">Delete</th>
+            </tr>
+            <tr>
+                <td>test.txt</td>
+                <td><span>0</span>/<span class="choices"><span>unlimited</span><span><svg width="16" height="16"><polygon points="4 9 8.5 14 13 9" fill="#0080db"></polygon></svg></span></span></td>
+                <td><span>2018-02-15 00:19</span>/<span class="choices"><span>unlimited</span><span><svg width="16" height="16"><polygon points="4 9 8.5 14 13 9" fill="#0080db"></polygon></svg></span></span></td></td>
+                <td><i class="material-icons">close</i></td>
+            </tr>
+        </tbody>
     </table>
-    <div class="empty-tip hide">Oops! Empty here.</div>
+    <div id="historyEmpty" class="empty-tip hide">Oops! Empty here.</div>
 </div>
