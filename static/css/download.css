@@ -186,7 +186,7 @@ body {
         color: #353535;
         text-align: center; }
       .uploader .result-container .inner-container .explanation, .uploader .download-container .inner-container .explanation {
-        width: 50vw;
+        width: 50%;
         margin-top: 12px;
         font-size: 16px;
         color: #505050;

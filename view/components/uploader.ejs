@@ -1,4 +1,5 @@
 <div class="uploader">
+    <div id="data" class="nothing hide"><%= data %></div>
     <div id="uploaderContainer" class="container">
         <nav class="nav-bar">
             <ul id="fileLabel">File</ul>
@@ -13,5 +14,8 @@
     </div>
     <div id="resultContainer" class="result-container hide">
         <%- include uploader_result.ejs -%>
+    </div>
+    <div id="errorContainer" class="error-container hide">
+        <%- include uploader_error.ejs -%>
     </div>
 </div>

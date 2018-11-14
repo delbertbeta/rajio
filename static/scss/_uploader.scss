@@ -9,7 +9,7 @@
         position: relative;
         display: block;
         border-radius: 2px;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
         height: 60vh;
         width: 60vw;
         overflow: hidden;
@@ -159,7 +159,7 @@
         position: relative;
         display: block;
         border-radius: 2px;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
         height: 60vh;
         width: 60vw;
         overflow: hidden;
@@ -294,6 +294,48 @@
                 font-size: 0.8rem;
                 color: #6a6a6a;
                 cursor: pointer;
+            }
+        }
+    }
+    .error-container {
+        position: relative;
+        display: block;
+        height: 60vh;
+        width: 40vw;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+        .inner-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100%;
+            .error {
+                width: 200px;
+                height: 200px;
+            }
+            .tip {
+                font-size: 18px;
+                color: #e05b62;
+                margin-top: 16px;
+                margin-bottom: 64px;
+            }
+            .back-button {
+                height: 3.6rem;
+                width: 16rem;
+                background-color: #0080db;
+                border-radius: 6px;
+                font-size: 1.2rem;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                margin-bottom: 0.5rem;
+                transition: background-color 0.2s ease;
+            }
+            .back-button:hover {
+                background-color: #3e9bdd;
             }
         }
     }

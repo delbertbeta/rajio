@@ -1,21 +1,29 @@
 (function () {
-    const uploaderContainer = document.getElementById('uploaderContainer');
-    const fileLabel = document.getElementById('fileLabel');
-    const textLabel = document.getElementById('textLabel');
-    const fileUploader = document.getElementById('fileUploader');
-    const fileUploadButton = document.getElementById('fileUploadButton');
-    const progressContainer = document.getElementById('progressContainer');
-    const cancelButton = document.getElementById('cancelButton');
-    const progressNumber = document.getElementById('progressNumber');
-    const resultContainer = document.getElementById('resultContainer');
-    const urlBox = document.getElementById('urlBox');
-    const copyButton = document.getElementById('copyButton');
-    const timesChoice = document.getElementById('timesChoice');
-    const dayChoice = document.getElementById('dayChoice');
-    const goBackButton = document.getElementById('goBackButton');
-    const deleteButton = document.getElementById('deleteButton');
-    const historyPanel = document.getElementById('historyPanel');
-    const historyEntry = document.getElementById('historyEntry');
+    const data = JSON.parse(document.getElementById('data').textContent)
+    const uploaderContainer = document.getElementById('uploaderContainer')
+    const fileLabel = document.getElementById('fileLabel')
+    const textLabel = document.getElementById('textLabel')
+    const fileUploader = document.getElementById('fileUploader')
+    const fileUploadButton = document.getElementById('fileUploadButton')
+    const progressContainer = document.getElementById('progressContainer')
+    const fileName = document.getElementById('fileName')
+    const finished = document.getElementById('finished')
+    const total = document.getElementById('total')
+    const cancelButton = document.getElementById('cancelButton')
+    const progressNumber = document.getElementById('progressNumber')
+    const resultContainer = document.getElementById('resultContainer')
+    const qrcodeImg = document.getElementById('qrcode')
+    const errorTip = document.getElementById('errorTip')
+    const backButton = document.getElementById('backButton')
+    const errorContainer = document.getElementById('errorContainer')
+    const urlBox = document.getElementById('urlBox')
+    const copyButton = document.getElementById('copyButton')
+    const timesChoice = document.getElementById('timesChoice')
+    const dayChoice = document.getElementById('dayChoice')
+    const goBackButton = document.getElementById('goBackButton')
+    const deleteButton = document.getElementById('deleteButton')
+    const historyPanel = document.getElementById('historyPanel')
+    const historyEntry = document.getElementById('historyEntry')
 
     timesOptions = `<li>1</li>
                     <li>2</li>
@@ -58,14 +66,26 @@
     fileUploader.addEventListener('drop', (event) => {
         event.preventDefault();
         uploaderContainer.classList.remove('enlarge');
+        if (event.dataTransfer.files.length > 0) {
+            fileHandle(event.dataTransfer.files[0])
+        }
     })
 
-    fileUploadButton.addEventListener('click', () => {
-        animateStatus(uploaderContainer, progressContainer);
-        updateProgress(0, 100, 2000);
-        setTimeout(() => {
-            animateStatus(progressContainer, resultContainer);
-        }, 2000);
+    fileUploadButton.addEventListener('click', (event) => {
+        const fileInput = document.createElement('input')
+        fileInput.type = 'file'
+        fileInput.click()
+        fileInput.onchange = (e) => {
+            if (fileInput.files.length > 0) {
+                fileHandle(fileInput.files[0])
+            }
+            delete fileInput
+        }
+        // animateStatus(uploaderContainer, progressContainer);
+        // updateProgress(0, 100, 2000);
+        // setTimeout(() => {
+        //     animateStatus(progressContainer, resultContainer);
+        // }, 2000);
     })
 
     cancelButton.addEventListener('click', () => {
@@ -108,6 +128,10 @@
         animateStatus(resultContainer, uploaderContainer);
     })
 
+    backButton.addEventListener('click', () => {
+        animateStatus(errorContainer, uploaderContainer);
+    })
+
     deleteButton.addEventListener('click', () => {
         animateStatus(resultContainer, uploaderContainer);
     })
@@ -132,16 +156,20 @@
     })
 
     function animateStatus(from, to) {
-        from.classList.remove('hide');
-        from.classList.remove('rotateIn');
+        from.classList.remove('hide')
+        from.classList.remove('rotateIn')
         from.classList.add('rotateOut')
-        setTimeout(() => {
-            from.classList.add('hide');
-            from.classList.remove('rotateOut');
-            to.classList.add('rotateIn');
+        const after = () => {
+            from.classList.add('hide')
+            from.classList.remove('rotateOut')
+            to.classList.add('rotateIn')
             to.classList.remove('hide')
-        }, 500)
+            from.removeEventListener('animationend', after)
+        }
+        from.addEventListener('animationend', after)
     }
+
+    let animationFrame = 0
 
     function updateProgress(from, to, timeout) {
         let startTime = -1;
@@ -157,10 +185,14 @@
             // console.log(display);
             progressNumber.textContent = display;
             if (progress < timeout) {
-                requestAnimationFrame(callback);
+                animationFrame = requestAnimationFrame(callback);
             }
         }
-        requestAnimationFrame(callback);
+        animationFrame = requestAnimationFrame(callback);
+    }
+    
+    function cancelProgress() {
+        cancelAnimationFrame(animationFrame)
     }
 
     function showSelection(event, option, callback) {
@@ -191,5 +223,62 @@
             });
             closeOption();
         })
+    }
+
+    function changeError(from, msg) {
+        errorTip.textContent = msg
+        animateStatus(from, errorContainer)
+    }
+
+    function fileHandle(file) {
+        if (file.size > data.maxFileSize) {
+            changeError(uploaderContainer, 'File is larger than limit (' + data.prettiedMaxFileSize + ').')
+        } else {
+            animateStatus(uploaderContainer, progressContainer)
+            const formData = new FormData()
+            formData.append('file', file)
+            
+            fileName.textContent = file.name
+            total.textContent = filesize(file.size)
+
+            let progress = 0
+            let origin = 0
+            let interval = setInterval(() => {
+                let tempProgress = Math.round(progress / file.size)
+                updateProgress(origin, tempProgress, 800)
+                finished.textContent = filesize(progress)
+                origin = tempProgress
+            }, 1000)
+            axios({
+                url: '/api/upload',
+                method: 'post',
+                data: formData,
+                onUploadProgress: (e) => {
+                    progress = e.loaded
+                }
+            }).then(r => {
+                clearInterval(interval)
+                cancelProgress()
+                finished.textContent = filesize(file.size)
+                updateProgress(origin, 100, 800)
+                showResult(r.data)
+                setTimeout(() => {
+                    animateStatus(progressContainer, resultContainer)
+                }, 1000)
+            }).catch(e => {
+                setTimeout(() => {
+                    changeError(progressContainer, 'Network Error.')
+                }, 1000)
+            })
+        }
+    }
+
+    function showResult(res) {
+        const url = `${data.domain}/s/${res.downloadCode}`
+        urlBox.value = url
+        const qr = qrcode(0, 'L')
+        qr.addData(url)
+        qr.make()
+        qrcodeImg.src = qr.createDataURL(10, 20)
     }
 })()
