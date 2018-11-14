@@ -3,6 +3,14 @@ const sequelize = require('../tool/sequelize')
 const fs = require('fs-extra')
 const moment = require('moment')
 
+const forbiddenHandle = async (ctx) => {
+  ctx.response.status = 404
+  await ctx.render('share', {
+    share: true,
+    forbidden: true
+  });
+}
+
 const route = async (ctx) => {
   const id = ctx.id
   const item = await sequelize.findOne({
@@ -11,15 +19,11 @@ const route = async (ctx) => {
     }
   })
   if (!item) {
-    ctx.throw(404, {
-      message: "No such document."
-    })
+    await forbiddenHandle(ctx)
     return
   }
   if (item.downloadLimit !== null && item.downloadLimit <= item.downloadCount) {
-    ctx.throw(404, {
-      message: "No such document."
-    })
+    await forbiddenHandle(ctx)
     return
   } else {
     item.downloadCount++
@@ -28,13 +32,14 @@ const route = async (ctx) => {
   const now = moment()
   const limit = moment(item.timeLimit)
   if (item.timeLimit !== null && now.isAfter(limit, 'second')) {
-    ctx.throw(404, {
-      message: "No such document."
-    })
+    await forbiddenHandle(ctx)
+    return
   }
+
   ctx.response.attachment(item.fileName)
   const stream = await fs.createReadStream(`data/upload/${item.id}`)
   ctx.response.body = stream
+
 }
 
 module.exports = {

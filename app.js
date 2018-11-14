@@ -1,5 +1,4 @@
 const Koa = require('koa');
-const router = require('./router/router');
 
 const path = require('path');
 
@@ -12,6 +11,11 @@ const log4js = require('./tool/log4js');
 
 const app = new Koa();
 
+const config = require('./config')
+
+global.config = config
+
+const router = require('./router/router')
 
 // app.use(async function (ctx, next) {
 //   console.log(ctx);

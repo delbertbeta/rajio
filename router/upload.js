@@ -9,7 +9,7 @@ let koaBodyFunc = koaBody({
     multipart: true,
     formidable: {
         uploadDir: path.resolve('../data/upload/'),
-        maxFieldsSize: 128 * 1024 * 1024,
+        maxFieldsSize: global.config.maxFileSize,
         onFileBegin: (name, file) => {
             file.path = './data/upload/' + hat()
         }

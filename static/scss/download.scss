@@ -98,18 +98,11 @@ body {
             text-align: center;  
         }
         .explanation {
+            width: 50vw;
             margin-top: 12px;
-            font-size: 14px;
-            color: #888888;
+            font-size: 16px;
+            color: #505050;
             text-align: center;
-        }
-        .qrcode {
-            width: 200px; // box-shadow: 0 0px 4px rgba(0, 0, 0, 0.2);
-            transition: all 0.5s ease;
-        }
-        .qrcode:hover {
-            box-shadow: 0 0px 10px rgba(0, 0, 0, 0.4);
-            transform: scale(1.2);
         }
         .url {
             overflow: hidden;
@@ -119,7 +112,7 @@ body {
             border: 1px solid #0080db;
             display: flex;
             justify-content: space-between;
-            margin-top: 0.8rem;
+            margin-top: 1.2rem;
             .url-box {
                 display: inline-block;
                 width: 400px;
@@ -147,6 +140,11 @@ body {
             .copy-botton:hover {
                 background-color: #3e9bdd;
             }
+        }
+        .not-found {
+            margin-top: 32px;
+            height: 220px;
+            width: 220px; 
         }
         .download {
             height: 160px;

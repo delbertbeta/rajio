@@ -186,16 +186,11 @@ body {
         color: #353535;
         text-align: center; }
       .uploader .result-container .inner-container .explanation, .uploader .download-container .inner-container .explanation {
+        width: 50vw;
         margin-top: 12px;
-        font-size: 14px;
-        color: #888888;
+        font-size: 16px;
+        color: #505050;
         text-align: center; }
-      .uploader .result-container .inner-container .qrcode, .uploader .download-container .inner-container .qrcode {
-        width: 200px;
-        transition: all 0.5s ease; }
-      .uploader .result-container .inner-container .qrcode:hover, .uploader .download-container .inner-container .qrcode:hover {
-        box-shadow: 0 0px 10px rgba(0, 0, 0, 0.4);
-        transform: scale(1.2); }
       .uploader .result-container .inner-container .url, .uploader .download-container .inner-container .url {
         overflow: hidden;
         height: 3rem;
@@ -204,7 +199,7 @@ body {
         border: 1px solid #0080db;
         display: flex;
         justify-content: space-between;
-        margin-top: 0.8rem; }
+        margin-top: 1.2rem; }
         .uploader .result-container .inner-container .url .url-box, .uploader .download-container .inner-container .url .url-box {
           display: inline-block;
           width: 400px;
@@ -229,6 +224,10 @@ body {
           transition: background-color 0.5s ease; }
         .uploader .result-container .inner-container .url .copy-botton:hover, .uploader .download-container .inner-container .url .copy-botton:hover {
           background-color: #3e9bdd; }
+      .uploader .result-container .inner-container .not-found, .uploader .download-container .inner-container .not-found {
+        margin-top: 32px;
+        height: 220px;
+        width: 220px; }
       .uploader .result-container .inner-container .download, .uploader .download-container .inner-container .download {
         height: 160px;
         width: 160px; }
