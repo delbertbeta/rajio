@@ -5,11 +5,11 @@ const moment = require('moment')
 module.exports = async (ctx) => {
   const item = await sequelize.findOne({
     where: {
-      downloadCode: ctx.id
+      downloadCode: ctx.code
     }
   })
   let forbidden = false
-  if (!item) {
+  if (!item || item.deleted) {
     forbidden = true
     ctx.response.status = 404
   } else {

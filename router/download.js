@@ -15,10 +15,10 @@ const route = async (ctx) => {
   const id = ctx.id
   const item = await sequelize.findOne({
     where: {
-      downloadCode: id
+      id: id
     }
   })
-  if (!item) {
+  if (!item || item.deleted) {
     await forbiddenHandle(ctx)
     return
   }

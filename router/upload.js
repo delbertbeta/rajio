@@ -16,46 +16,25 @@ let koaBodyFunc = koaBody({
     }
 })
 
-const route = async function (ctx, next) {
-    let data = await sequelize.create({
-        id: ctx.request.files.file.path.split('/').pop(),
-        downloadCount: 0,
-        downloadLimit: null,
-        timeLimit: null,
-        downloadCode: hat(16, 16),
-        fileSize: ctx.request.files.file.size,
-        fileName: ctx.request.files.file.name
-    });
-    ctx.response.body = data;
-    // uploader.fields('file')(ctx, async (ctx, next) => {
-    //     let obj = {
-    //         id: tempInfo.id,
-    //         downloadLimit: -1,
-    //         timeLimit: -1,
-    //         downloadCode: hat(16, 16),
-    //         fileName: tempInfo.fileName
-    //     }
-    //     let data = await sequelize.create({
-    //         id: obj.id,
-    //         downloadCount: 0,
-    //         downloadLimit: null,
-    //         timeLimit: null,
-    //         downloadCode: obj.downloadCode,
-    //         fileName: obj.fileName
-    //     });
-
-    //     ctx.response.body = obj;
-    //     tempInfo = {};
-    //     // }
-    //     // , () => {
-    //     //     logger.error('Failed to save file ' + obj.fileName + 'on id' + obj.id + ".");
-    //     //     ctx.response.body = {
-    //     //         error: 'Failed to save file'
-    //     //     }
-    //     //     tempInfo = {};
-    //     // }
-    //     // )
-    // })
+const route = async function (ctx) {
+    if (!ctx.request.body.idenfitier) {
+        ctx.response.status = 401
+        ctx.response.body = {
+            message: 'Identifier is needed.'
+        }
+    } else {
+        const data = await sequelize.create({
+            id: ctx.request.files.file.path.split('/').pop(),
+            downloadCount: 0,
+            downloadLimit: null,
+            timeLimit: null,
+            downloadCode: hat(24, 16),
+            fileSize: ctx.request.files.file.size,
+            fileName: ctx.request.files.file.name,
+            identifier: ctx.request.body.idenfitier
+        });
+        ctx.response.body = data;
+    }
 };
 
 module.exports = {

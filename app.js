@@ -8,6 +8,7 @@ const serveSass = require('koa.sass');
 
 const sequelize = require('./tool/sequelize');
 const log4js = require('./tool/log4js');
+const gc = require('./tool/gc')
 
 const app = new Koa();
 
@@ -16,6 +17,8 @@ const config = require('./config')
 global.config = config
 
 const router = require('./router/router')
+
+gc.init()
 
 // app.use(async function (ctx, next) {
 //   console.log(ctx);

@@ -43,6 +43,13 @@ const rajio = sequelize.define('rajio', {
     },
     fileName: {
         type: Sequelize.STRING
+    },
+    deleted: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+    },
+    identifier: {
+        type: Sequelize.STRING
     }
 })
 

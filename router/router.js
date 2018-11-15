@@ -4,6 +4,8 @@ const download = require('./download');
 const index = require('./index');
 const upload = require('./upload');
 const share = require('./share')
+const deleteHandle = require('./delete')
+// const update = require('')
 
 router.get('/', index)
 
@@ -15,9 +17,30 @@ router.param('id', (id, ctx, next) => {
   return next()
 }).get('/d/:id/:fileName', download.route)
 
+router.param('code', (id, ctx, next) => {
+  ctx.code = id
+  return next()
+}).get('/s/:code', share)
+
 router.param('id', (id, ctx, next) => {
   ctx.id = id
   return next()
 }).get('/s/:id', share)
+
+router.param('id', (id, ctx, next) => {
+  ctx.id = id
+  return next()
+}).param('identifier', (id, ctx, next) => {
+  ctx.identifier = id
+  return next()
+}).delete('/api/:identifier/:id', deleteHandle.route)
+
+router.param('id', (id, ctx, next) => {
+  ctx.id = id
+  return next()
+}).param('identifier', (id, ctx, next) => {
+  ctx.identifier = id
+  return next()
+}).put('/api/:identifier/:id', , deleteHandle.route)
 
 module.exports = router

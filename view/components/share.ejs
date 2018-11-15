@@ -14,7 +14,7 @@
         <div id="copyButton" class="copy-botton">Copy</div>
       </div>
       <img class="download" src="/static/img/download.svg"/>
-      <a id="goBackButton" download="<%= item.fileName %>" href="<%= domain %>/d/<%= item.downloadCode %>/<%= item.fileName %>" class="go-back-button">Download</a>
+      <a id="goBackButton" download="<%= item.fileName %>" href="<%= domain %>/d/<%= item.id %>/<%= item.fileName %>" class="go-back-button">Download</a>
       <% } %>
       <% if(forbidden) { %>
       <div class="title">

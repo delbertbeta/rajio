@@ -33,6 +33,7 @@
     "koa.sass": "^1.0.3",
     "log4js": "^3.0.6",
     "moment": "^2.22.2",
+    "node-cron": "^2.0.3",
     "pretty-bytes": "^5.1.0",
     "sequelize": "^4.33.4",
     "sqlite3": "^4.0.3"

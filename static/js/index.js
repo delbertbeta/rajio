@@ -1,3 +1,35 @@
+function hat(bits, base) {
+    if (!base) base = 16;
+    if (bits === undefined) bits = 128;
+    if (bits <= 0) return '0';
+
+    var digits = Math.log(Math.pow(2, bits)) / Math.log(base);
+    for (var i = 2; digits === Infinity; i *= 2) {
+        digits = Math.log(Math.pow(2, bits / i)) / Math.log(base) * i;
+    }
+
+    var rem = digits - Math.floor(digits);
+
+    var res = '';
+
+    for (var i = 0; i < Math.floor(digits); i++) {
+        var x = Math.floor(Math.random() * base).toString(base);
+        res = x + res;
+    }
+
+    if (rem) {
+        var b = Math.pow(base, rem);
+        var x = Math.floor(Math.random() * b).toString(base);
+        res = x + res;
+    }
+
+    var parsed = parseInt(res, base);
+    if (parsed !== Infinity && parsed >= Math.pow(2, bits)) {
+        return hat(bits, base)
+    }
+    else return res;
+}
+
 (function () {
     const data = JSON.parse(document.getElementById('data').textContent)
     const uploaderContainer = document.getElementById('uploaderContainer')
@@ -53,7 +85,13 @@
     } else {
         uploads = JSON.parse(uploads)
     }
-    
+
+    let identifier = localStorage['identifier']
+    if (!identifier) {
+        identifier = hat()
+        localStorage['identifier'] = identifier
+    }
+
     fileLabel.addEventListener('click', () => {
         uploaderContainer.classList.remove('right');
     })
@@ -91,11 +129,6 @@
             }
             delete fileInput
         }
-        // animateStatus(uploaderContainer, progressContainer);
-        // updateProgress(0, 100, 2000);
-        // setTimeout(() => {
-        //     animateStatus(progressContainer, resultContainer);
-        // }, 2000);
     })
 
     cancelButton.addEventListener('click', () => {
@@ -127,7 +160,7 @@
         })
     })
 
-    dayChoice.addEventListener('click', function(event) {
+    dayChoice.addEventListener('click', function (event) {
         showSelection(event, dayOptions, (option) => {
             dayChoice.children[0].textContent = option.value;
             console.log(option.index);
@@ -200,7 +233,7 @@
         }
         animationFrame = requestAnimationFrame(callback);
     }
-    
+
     function cancelProgress() {
         cancelAnimationFrame(animationFrame)
     }
@@ -240,7 +273,7 @@
         animateStatus(from, errorContainer)
     }
 
-    function saveUploads () {
+    function saveUploads() {
         localStorage['uploads'] = JSON.stringify(uploads)
     }
 
@@ -251,7 +284,8 @@
             animateStatus(uploaderContainer, progressContainer)
             const formData = new FormData()
             formData.append('file', file)
-            
+            formData.append('identifier', identifier)
+
             fileName.textContent = file.name
             total.textContent = filesize(file.size)
 
@@ -276,7 +310,7 @@
                 finished.textContent = filesize(file.size)
                 updateProgress(origin, 100, 800)
                 showResult(r.data)
-                uploads.push(r.data)
+                uploads.splice(0, 0, r.data)
                 saveUploads()
                 refreshHistory()
                 setTimeout(() => {
@@ -298,7 +332,7 @@
         qr.make()
         qrcodeImg.src = qr.createDataURL(10, 20)
     }
-    
+
     function refreshHistory() {
         if (uploads.length === 0) {
             historyEmpty.classList.remove('hide')
@@ -309,14 +343,14 @@
         // arrow.setAttribute('height', '16')
         // arrow.setAttribute('width', '16')
         // arrow.innerHTML = '<polygon points="4 9 8.5 14 13 9" fill="#0080db"></polygon>'
-        
-        while (historyTable.children.length > 1){
+
+        while (historyTable.children.length > 1) {
             // debugger;
             historyTable.removeChild(historyTable.lastChild)
         }
-        
+
         const trs = []
-        
+
         uploads.forEach(v => {
             const tr = document.createElement('tr')
             tr.innerHTML = `
@@ -332,5 +366,5 @@
     }
 
     refreshHistory()
-    
+
 })()
