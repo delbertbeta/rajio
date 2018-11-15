@@ -5,7 +5,7 @@ const index = require('./index');
 const upload = require('./upload');
 const share = require('./share')
 const deleteHandle = require('./delete')
-// const update = require('')
+const update = require('./update')
 
 router.get('/', index)
 
@@ -41,6 +41,6 @@ router.param('id', (id, ctx, next) => {
 }).param('identifier', (id, ctx, next) => {
   ctx.identifier = id
   return next()
-}).put('/api/:identifier/:id', , deleteHandle.route)
+}).put('/api/:identifier/:id', update.koaBody, update.route)
 
 module.exports = router

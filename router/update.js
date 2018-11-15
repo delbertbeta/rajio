@@ -2,7 +2,7 @@ const moment = require('moment')
 const koaBody = require('koa-body')
 
 const downloadLimit = [
-  1, 5, 10, 20, 50, 100, 1000, null 
+  1, 5, 10, 20, 50, 100, 1000, null
 ]
 
 const timeLimit = [
@@ -32,6 +32,47 @@ const route = async function (ctx, next) {
     ctx.throw(403)
     return
   }
+
+  const body = ctx.request.body
+
+  const timeObj = timeLimit[body.timeLimit]
+  const downloadObj = downloadLimit[body.downloadLimit]
+
+  if (!body.timeLimit || !body.downloadLimit || (typeof timeObj === 'undefined' && typeof downloadObj === 'undefined')) {
+    ctx.throw(400)
+    return
+  }
+
+  // update 
+  if (typeof timeObj !== 'undefined') {
+    if (timeObj === null) {
+      item.timeLimit = null
+    } else {
+      const now = moment()
+      const targetTime = moment(item.uploadTime).add(...timeObj)
+      if (targetTime.isBefore(now, 'second')) {
+        ctx.throw(400, 'time limit is before than now.')
+        return
+      } else {
+        item.timeLimit = targetTime.toDate()
+      }
+    }
+  }
+
+  if (downloadObj) {
+    if (downloadObj === null) {
+      item.downloadLimit = null
+    } else {
+      if (downloadObj < item.downloadCount) {
+        ctx.throw(400, 'download limit is less than download count.')
+        return
+      } else {
+        item.downloadLimit = downloadObj
+      }
+    }
+  }
+
+  item.save()
 
   ctx.response.body = {
     message: "OK"
