@@ -55,14 +55,15 @@
     .header .history-entry i {
       font-size: 2rem; }
   .header .history-entry:hover {
-    background-color: rgba(0, 0, 0, 0.2); }
+    background-color: rgba(0, 0, 0, 0.1); }
 
 .history-panel {
   position: fixed;
-  height: 30vh;
+  height: 50vh;
   width: 720px;
   right: 5%;
   top: 7rem;
+  overflow: hidden;
   background-color: white;
   box-shadow: 0 0px 16px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
@@ -70,29 +71,59 @@
   padding: 1rem;
   box-sizing: border-box;
   overflow-y: auto; }
-  .history-panel table {
+  .history-panel .renew-button {
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    .history-panel .renew-button div {
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      transition: background-color 0.2s ease;
+      border-radius: 4px; }
+    .history-panel .renew-button div:hover {
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.1); }
+  .history-panel i {
+    cursor: pointer; }
+  .history-panel .table-wrapper::-webkit-scrollbar-track {
+    border-radius: 4px;
+    background-color: #F5F5F5; }
+  .history-panel .table-wrapper::-webkit-scrollbar {
+    width: 8px;
+    background-color: #F5F5F5; }
+  .history-panel .table-wrapper::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #555; }
+  .history-panel .table-wrapper {
     width: 100%;
-    table-layout: fixed; }
-    .history-panel table tr {
-      font-weight: 300;
-      position: relative;
-      height: 2rem; }
-      .history-panel table tr th {
-        font-weight: normal; }
-      .history-panel table tr th:first-child {
-        text-align: left; }
-      .history-panel table tr td:first-child {
-        text-align: left;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis; }
-      .history-panel table tr td {
-        text-align: center; }
-        .history-panel table tr td i {
-          color: #6a6a6a; }
-    .history-panel table tr:first-child {
-      color: #6a6a6a;
-      border-bottom: 1px solid #838383; }
+    height: 43vh;
+    overflow-x: hidden;
+    overflow-y: auto; }
+    .history-panel .table-wrapper table {
+      width: 100%;
+      table-layout: fixed;
+      overflow-y: auto; }
+      .history-panel .table-wrapper table tr {
+        font-weight: 300;
+        position: relative;
+        height: 2rem; }
+        .history-panel .table-wrapper table tr th {
+          font-weight: normal; }
+        .history-panel .table-wrapper table tr th:first-child {
+          text-align: left; }
+        .history-panel .table-wrapper table tr td:first-child {
+          text-align: left;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis; }
+        .history-panel .table-wrapper table tr td {
+          text-align: center; }
+          .history-panel .table-wrapper table tr td i {
+            color: #6a6a6a; }
+      .history-panel .table-wrapper table tr:first-child {
+        color: #6a6a6a;
+        border-bottom: 1px solid #838383; }
   .history-panel .empty-tip {
     height: 100%;
     width: 100%;

@@ -1,5 +1,6 @@
 const moment = require('moment')
 const koaBody = require('koa-body')
+const sequelize = require('../tool/sequelize')
 
 const downloadLimit = [
   1, 5, 10, 20, 50, 100, 1000, null
@@ -38,8 +39,8 @@ const route = async function (ctx, next) {
   const timeObj = timeLimit[body.timeLimit]
   const downloadObj = downloadLimit[body.downloadLimit]
 
-  if (!body.timeLimit || !body.downloadLimit || (typeof timeObj === 'undefined' && typeof downloadObj === 'undefined')) {
-    ctx.throw(400)
+  if ((typeof body.timeLimit !== 'number' && typeof body.downloadLimit !== 'number') || (typeof timeObj === 'undefined' && typeof downloadObj === 'undefined')) {
+    ctx.throw(400, "Invalid parameter.")
     return
   }
 
@@ -59,7 +60,7 @@ const route = async function (ctx, next) {
     }
   }
 
-  if (downloadObj) {
+  if (typeof downloadObj !== 'undefined') {
     if (downloadObj === null) {
       item.downloadLimit = null
     } else {
@@ -74,9 +75,7 @@ const route = async function (ctx, next) {
 
   item.save()
 
-  ctx.response.body = {
-    message: "OK"
-  }
+  ctx.response.body = item
 }
 
 module.exports = {

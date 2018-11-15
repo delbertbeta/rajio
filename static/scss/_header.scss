@@ -46,7 +46,7 @@
         }
     }
     .history-entry:hover {
-        background-color: rgba(0, 0, 0, 0.2);
+        background-color: rgba(0, 0, 0, 0.1);
     }
 }
 
@@ -56,6 +56,7 @@
     width: 720px;
     right: 5%;
     top: 7rem;
+    overflow: hidden;
     background-color: white;
     box-shadow: 0 0px 16px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
@@ -64,36 +65,80 @@
     padding: 1rem;
     box-sizing: border-box;
     overflow-y: auto;
-    table {
+    .renew-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        div {
+            padding: 6px 12px;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.2s ease;
+            border-radius: 4px;
+        }
+        div:hover {
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+    }
+    i {
+        cursor: pointer;
+    }
+    .table-wrapper::-webkit-scrollbar-track
+    {
+        // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        border-radius: 4px;
+        background-color: #F5F5F5;
+    }
+
+    .table-wrapper::-webkit-scrollbar
+    {
+        width: 8px;
+        background-color: #F5F5F5;
+    }
+
+    .table-wrapper::-webkit-scrollbar-thumb
+    {
+        border-radius: 4px;
+        // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+        background-color: #555;
+    }
+    .table-wrapper {
         width: 100%;
-        table-layout: fixed;
-        
-        tr {
-            font-weight: 300;
-            position: relative;
-            height: 2rem;
-            th {
-                font-weight: normal;
-            }
-            th:first-child {
-                text-align: left;
-            }
-            td:first-child {
-                text-align: left;
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-            }
-            td {
-                text-align: center;
-                i {
-                    color: #6a6a6a;
+        height: 43vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+        table {
+            width: 100%;
+            table-layout: fixed;
+            overflow-y: auto;
+            tr {
+                font-weight: 300;
+                position: relative;
+                height: 2rem;
+                th {
+                    font-weight: normal;
+                }
+                th:first-child {
+                    text-align: left;
+                }
+                td:first-child {
+                    text-align: left;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+                td {
+                    text-align: center;
+                    i {
+                        color: #6a6a6a;
+                    }
                 }
             }
-        }
-        tr:first-child {
-            color: #6a6a6a;
-            border-bottom: 1px solid #838383;
+            tr:first-child {
+                color: #6a6a6a;
+                border-bottom: 1px solid #838383;
+            }
         }
     }
     .empty-tip {

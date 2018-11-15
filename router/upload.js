@@ -17,7 +17,7 @@ let koaBodyFunc = koaBody({
 })
 
 const route = async function (ctx) {
-    if (!ctx.request.body.idenfitier) {
+    if (typeof ctx.request.body.identifier !== 'string') {
         ctx.response.status = 401
         ctx.response.body = {
             message: 'Identifier is needed.'
@@ -31,7 +31,7 @@ const route = async function (ctx) {
             downloadCode: hat(24, 16),
             fileSize: ctx.request.files.file.size,
             fileName: ctx.request.files.file.name,
-            identifier: ctx.request.body.idenfitier
+            identifier: ctx.request.body.identifier
         });
         ctx.response.body = data;
     }

@@ -58,33 +58,27 @@ function hat(bits, base) {
     const historyEntry = document.getElementById('historyEntry')
     const historyEmpty = document.getElementById('historyEmpty')
     const historyTable = document.getElementById('historyTable')
+    const renewButton = document.getElementById('renewButton')
 
-    timesOptions = `<li>1</li>
-                    <li>2</li>
-                    <li>3</li>
-                    <li>4</li>
-                    <li>5</li>
-                    <li>10</li>
-                    <li>20</li>
-                    <li>50</li>
-                    <li>unlimited</li>`;
+    const downloadLimit = [
+        1, 5, 10, 20, 50, 100, 1000, null
+    ]
 
-    dayOptions = `<li>1 hour</li>
-                    <li>12 hours</li>
-                    <li>1 day</li>
-                    <li>7 days</li>
-                    <li>1 month</li>
-                    <li>0.5 years</li>
-                    <li>1 year</li>
-                    <li>unlimited days</li>`;
+    const timeLimit = [
+        [1, 'hour'],
+        [12, 'hour'],
+        [1, 'day'],
+        [7, 'day'],
+        [1, 'month'],
+        [6, 'month'],
+        [1, 'year'],
+        null
+    ]
+
+    let targetUpload = {}
 
     // Read localStorage
-    let uploads = localStorage['uploads']
-    if (!uploads) {
-        uploads = []
-    } else {
-        uploads = JSON.parse(uploads)
-    }
+    let uploads = []
 
     let identifier = localStorage['identifier']
     if (!identifier) {
@@ -153,17 +147,45 @@ function hat(bits, base) {
         }, 5000);
     })
 
-    timesChoice.addEventListener('click', function (event) {
-        showSelection(event, timesOptions, (option) => {
-            timesChoice.children[0].textContent = option.value;
-            console.log(option.index);
+    dayChoice.addEventListener('click', function (event) {
+        const options = timeLis(targetUpload.uploadTime)
+        showSelection(event, options, (option) => {
+            axios.put(`/api/${identifier}/${targetUpload.id}`, {
+                timeLimit: parseInt(option.value)
+            }).then(r => {
+                uploads[0] = r.data
+                refreshHistory()
+                let resultStr = ''
+                if (r.data.timeLimit === null) {
+                    resultStr = 'unlimited'
+                } else {
+                    resultStr = moment(r.data.timeLimit).format('YYYY-MM-DD HH:mm')
+                }
+                dayChoice.children[0].textContent = resultStr
+            }).catch(e => {
+                alert(e.response ? e.response.data : e)
+            })
         })
     })
 
-    dayChoice.addEventListener('click', function (event) {
-        showSelection(event, dayOptions, (option) => {
-            dayChoice.children[0].textContent = option.value;
-            console.log(option.index);
+    timesChoice.addEventListener('click', function (event) {
+        const options = countLis(targetUpload.downloadCount)
+        showSelection(event, options, (option) => {
+            axios.put(`/api/${identifier}/${targetUpload.id}`, {
+                downloadLimit: parseInt(option.value)
+            }).then(r => {
+                uploads[0] = r.data
+                refreshHistory()
+                let resultStr = ''
+                if (r.data.downloadLimit === null) {
+                    resultStr = 'unlimited'
+                } else {
+                    resultStr = r.data.downloadLimit
+                }
+                timesChoice.children[0].textContent = resultStr
+            }).catch(e => {
+                alert(e.response ? e.response.data : e)
+            })
         })
     })
 
@@ -183,7 +205,7 @@ function hat(bits, base) {
         historyPanel.classList.add('fadeIn');
         historyPanel.classList.remove('hide');
         let optionMask = document.createElement('div');
-        optionMask.classList.add('option-mask');
+        optionMask.classList.add('lower-option-mask');
         document.body.appendChild(optionMask);
         let closeOption = () => {
             document.body.removeChild(optionMask);
@@ -195,7 +217,13 @@ function hat(bits, base) {
             }, 500)
         };
         optionMask.addEventListener('click', closeOption)
+    })
 
+    renewButton.addEventListener('click', () => {
+        identifier = hat()
+        localStorage['identifier'] = identifier
+        uploads = []
+        refreshHistory()
     })
 
     function animateStatus(from, to) {
@@ -238,15 +266,43 @@ function hat(bits, base) {
         cancelAnimationFrame(animationFrame)
     }
 
+    function countLis(count) {
+        let res = ''
+        downloadLimit.forEach((v, i) => {
+            if (v !== null && v > count) {
+                res += `<li data-index="${i}">${v}</li>`
+            } else if (v === null) {
+                res += `<li data-index="${i}">unlimited</li>`
+            }
+        })
+        return res
+    }
+
+    function timeLis(date) {
+        const now = moment()
+        const boundary = moment(date)
+        let res = ''
+        timeLimit.forEach((v, i) => {
+            if (v !== null && now.isBefore(boundary.add(...v))) {
+                res += `<li data-index="${i}">${v.join(' ')}</li>`
+            } else if (v === null) {
+                res += `<li data-index="${i}">unlimited</li>`
+            }
+        })
+        return res
+    }
+
     function showSelection(event, option, callback) {
         let optionDom = document.createElement('ul');
+        optionDom.style.overflowY = 'auto'
+        optionDom.style.maxHeight = '100vh'
         optionDom.classList.add('options');
         optionDom.classList.add('fadeIn');
         optionDom.innerHTML = option;
         optionDom.style.left = event.clientX - 75 + 'px';
         optionDom.style.top = event.clientY / 4 + 'px';
         let optionMask = document.createElement('div');
-        optionMask.classList.add('option-mask');
+        optionMask.classList.add('higher-option-mask');
         document.body.appendChild(optionMask);
         let closeOption = () => {
             document.body.removeChild(optionMask);
@@ -261,7 +317,7 @@ function hat(bits, base) {
             event.preventDefault();
             event.stopPropagation();
             callback({
-                value: event.target.textContent,
+                value: event.target.attributes['data-index'].value,
                 index: Array.prototype.indexOf.call(optionDom.children, event.target)
             });
             closeOption();
@@ -273,8 +329,43 @@ function hat(bits, base) {
         animateStatus(from, errorContainer)
     }
 
-    function saveUploads() {
-        localStorage['uploads'] = JSON.stringify(uploads)
+    function findTargetIndex(node) {
+        while(!node.hasAttribute('data-index')) {
+            node = node.parentNode
+        }
+        return parseInt(node.attributes['data-index'].value)
+    }
+
+    function listDayChange(event) {
+        const index = findTargetIndex(event.target)
+        const target = uploads[index]
+        const options = timeLis(target.uploadTime)
+        showSelection(event, options, (option) => {
+            axios.put(`/api/${identifier}/${target.id}`, {
+                timeLimit: parseInt(option.value)
+            }).then(r => {
+                uploads[index] = r.data
+                refreshHistory()
+            }).catch(e => {
+                alert(e.response ? e.response.data : e)
+            })
+        })
+    }
+
+    function listTimesChange(event) {
+        const index = findTargetIndex(event.target)
+        const target = uploads[index]
+        const options = countLis(target.downloadCount)
+        showSelection(event, options, (option) => {
+            axios.put(`/api/${identifier}/${target.id}`, {
+                downloadLimit: parseInt(option.value)
+            }).then(r => {
+                uploads[index] = r.data
+                refreshHistory()
+            }).catch(e => {
+                alert(e.response ? e.response.data : e)
+            })
+        })
     }
 
     function fileHandle(file) {
@@ -311,7 +402,7 @@ function hat(bits, base) {
                 updateProgress(origin, 100, 800)
                 showResult(r.data)
                 uploads.splice(0, 0, r.data)
-                saveUploads()
+                targetUpload = r.data
                 refreshHistory()
                 setTimeout(() => {
                     animateStatus(progressContainer, resultContainer)
@@ -336,8 +427,10 @@ function hat(bits, base) {
     function refreshHistory() {
         if (uploads.length === 0) {
             historyEmpty.classList.remove('hide')
+            renewButton.classList.add('hide')
         } else {
             historyEmpty.classList.add('hide')
+            renewButton.classList.remove('hide')
         }
         // const arrow = document.createElement('svg')
         // arrow.setAttribute('height', '16')
@@ -351,20 +444,25 @@ function hat(bits, base) {
 
         const trs = []
 
-        uploads.forEach(v => {
+        uploads.forEach((v, i) => {
             const tr = document.createElement('tr')
             tr.innerHTML = `
             <td>${v.fileName}</td>
-            <td><span>${v.downloadCount}</span>/<span class="choices"><span>${v.downloadLimit === null ? 'unlimited' : v.downloadLimit}</span><span><svg width="16" height="16"><polygon points="4 9 8.5 14 13 9" fill="#0080db"></polygon></svg></span></span></td>
-            <td><span>${moment(v.uploadTime).format('YYYY-MM-DD HH:mm')}</span>/<span class="choices"><span>${v.timeLimit === null ? 'unlimited' : moment(v.timeLimit).format('YYYY-MM-DD HH:mm')}</span><span><svg width="16" height="16"><polygon points="4 9 8.5 14 13 9" fill="#0080db"></polygon></svg></span></span></td></td>
+            <td><span>${v.downloadCount}</span>/<span class="choices" data-index="${i}"><span>${v.downloadLimit === null ? 'unlimited' : v.downloadLimit}</span><span><svg width="16" height="16"><polygon points="4 9 8.5 14 13 9" fill="#0080db"></polygon></svg></span></span></td>
+            <td><span>${moment(v.uploadTime).format('YYYY-MM-DD HH:mm')}</span>/<span class="choices" data-index="${i}"><span>${v.timeLimit === null ? 'unlimited' : moment(v.timeLimit).format('YYYY-MM-DD HH:mm')}</span><span><svg width="16" height="16"><polygon points="4 9 8.5 14 13 9" fill="#0080db"></polygon></svg></span></span></td></td>
             <td><i class="material-icons" style="color: #e05b62">close</i></td>
             `
+            let choices = tr.getElementsByClassName('choices')
+            choices[0].addEventListener('click', listTimesChange)
+            choices[1].addEventListener('click', listDayChange)
             trs.push(tr)
         })
 
         historyTable.append(...trs)
     }
 
-    refreshHistory()
-
+    axios.get(`/api/${identifier}`).then(res => {
+        uploads = res.data
+        refreshHistory()
+    })
 })()
