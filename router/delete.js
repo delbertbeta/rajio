@@ -1,3 +1,4 @@
+const sequelize = require('../tool/sequelize')
 const gc = require('../tool/gc')
 
 const route = async function (ctx, next) {

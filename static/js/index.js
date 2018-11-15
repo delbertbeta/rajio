@@ -198,7 +198,13 @@ function hat(bits, base) {
     })
 
     deleteButton.addEventListener('click', () => {
-        animateStatus(resultContainer, uploaderContainer);
+        axios.delete(`/api/${identifier}/${targetUpload.id}`).then((res) => {
+            uploads.splice(0, 1)
+            refreshHistory()
+            animateStatus(resultContainer, uploaderContainer)
+        }).catch(e => {
+            alert(e.response ? e.response.data : e)
+        })
     })
 
     historyEntry.addEventListener('click', () => {
@@ -330,7 +336,7 @@ function hat(bits, base) {
     }
 
     function findTargetIndex(node) {
-        while(!node.hasAttribute('data-index')) {
+        while (!node.hasAttribute('data-index')) {
             node = node.parentNode
         }
         return parseInt(node.attributes['data-index'].value)
@@ -365,6 +371,20 @@ function hat(bits, base) {
             }).catch(e => {
                 alert(e.response ? e.response.data : e)
             })
+        })
+    }
+
+    function listDelete(event) {
+        const index = findTargetIndex(event.target)
+        const target = uploads[index]
+        axios.delete(`/api/${identifier}/${target.id}`).then(r => {
+            uploads.splice(index, 1)
+            if (index === 0 && !resultContainer.classList.contains('hide')) {
+                animateStatus(resultContainer, uploaderContainer)
+            }
+            refreshHistory()
+        }).catch(e => {
+            alert(e.response ? e.response.data : e)
         })
     }
 
@@ -450,11 +470,12 @@ function hat(bits, base) {
             <td>${v.fileName}</td>
             <td><span>${v.downloadCount}</span>/<span class="choices" data-index="${i}"><span>${v.downloadLimit === null ? 'unlimited' : v.downloadLimit}</span><span><svg width="16" height="16"><polygon points="4 9 8.5 14 13 9" fill="#0080db"></polygon></svg></span></span></td>
             <td><span>${moment(v.uploadTime).format('YYYY-MM-DD HH:mm')}</span>/<span class="choices" data-index="${i}"><span>${v.timeLimit === null ? 'unlimited' : moment(v.timeLimit).format('YYYY-MM-DD HH:mm')}</span><span><svg width="16" height="16"><polygon points="4 9 8.5 14 13 9" fill="#0080db"></polygon></svg></span></span></td></td>
-            <td><i class="material-icons" style="color: #e05b62">close</i></td>
+            <td><i class="material-icons" data-index="${i}" style="color: #e05b62">close</i></td>
             `
             let choices = tr.getElementsByClassName('choices')
             choices[0].addEventListener('click', listTimesChange)
             choices[1].addEventListener('click', listDayChange)
+            tr.getElementsByClassName('material-icons')[0].addEventListener('click', listDelete)
             trs.push(tr)
         })
 

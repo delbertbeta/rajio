@@ -35,8 +35,8 @@ module.exports = {
     cron.schedule('*/15 * * * *', garbageCollection)
   },
   recycle: (item) => {
-    v.deleted = true
-    v.save()
+    item.deleted = true
+    item.save()
     fs.removeSync(path.resolve(`./data/upload/${item.id}`))
   }
 }
