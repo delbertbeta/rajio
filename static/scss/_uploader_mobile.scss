@@ -1,0 +1,48 @@
+@media (max-width: 500px){
+  .uploader {
+    padding-bottom: 0;
+    .container {
+      height: 60vh;
+      width: 90vw;
+      .uploader-file-container {
+        .tip-text {
+          font-size: 1.2rem;
+        }
+        // .upload-button {
+        //   font-size: 1rem;
+        //   width: 14rem;
+        //   height: 3.2rem;
+        // }
+      }
+    }
+    .progress-container {
+      height: 60vh;
+      width: 90vw;
+      .file-name {
+        width: 80%;
+        text-align: center;
+      }
+    }
+    .result-container {
+      height: 60vh;
+      width: 90vw;
+      .url {
+        width: 100% !important;
+      }
+      .copy-botton {
+        flex-shrink: 0;
+      }
+      .function-line {
+        font-size: 0.8rem;
+      }
+    }
+    .error-container {
+      height: 60vh;
+      width: 90vw;
+      .tip {
+        width: 80%;
+        text-align: center;
+      }
+    }
+  }
+}

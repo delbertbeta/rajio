@@ -14,6 +14,11 @@ html {
   font-family: sans-serif;
   overflow: hidden; }
 
+@media (max-width: 500px) {
+  html {
+    background-size: 14rem;
+    background-position: bottom 1rem right 1rem; } }
+
 body {
   margin: 0;
   min-width: 100%;
@@ -75,7 +80,7 @@ body {
     display: inline-block;
     position: relative;
     vertical-align: bottom;
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.5rem;
     margin-left: 0.5rem;
     font-size: 1.5rem;
     color: #838383;
@@ -177,6 +182,35 @@ body {
     left: 0;
     color: #6a6a6a; }
 
+@media (max-width: 500px) {
+  .header {
+    height: 4rem;
+    padding: 1rem 5%; }
+    .header .header-icon {
+      font-size: 2rem; }
+    .header .header-title {
+      font-size: 2rem; }
+    .header .header-expaination {
+      font-size: 1rem; }
+    .header .history-entry {
+      bottom: 0.5rem; }
+  .history-panel {
+    height: 60vh;
+    width: 95vw;
+    top: 8vh;
+    left: 2.5vw; }
+    .history-panel .renew-button {
+      margin-top: 6px; }
+    .history-panel .table-wrapper::-webkit-scrollbar {
+      width: 2px; }
+    .history-panel .table-wrapper::-webkit-scrollbar-track {
+      border-radius: 2px; }
+    .history-panel .table-wrapper::-webkit-scrollbar-thumb {
+      border-radius: 2px; }
+    .history-panel .table-wrapper {
+      height: 51vh;
+      overflow-x: auto; } }
+
 .footer {
   width: 100%;
   height: 8rem;
@@ -193,6 +227,12 @@ body {
     .footer .footer-text .red-icon {
       color: #ff7373;
       vertical-align: top; }
+
+@media (max-width: 500px) {
+  .footer {
+    height: 4rem;
+    padding: 1rem 1rem;
+    margin-bottom: 1rem; } }
 
 .uploader {
   display: flex;
@@ -481,6 +521,36 @@ body {
         transition: background-color 0.2s ease; }
       .uploader .error-container .inner-container .back-button:hover {
         background-color: #3e9bdd; }
+
+@media (max-width: 500px) {
+  .uploader {
+    padding-bottom: 0; }
+    .uploader .container {
+      height: 60vh;
+      width: 90vw; }
+      .uploader .container .uploader-file-container .tip-text {
+        font-size: 1.2rem; }
+    .uploader .progress-container {
+      height: 60vh;
+      width: 90vw; }
+      .uploader .progress-container .file-name {
+        width: 80%;
+        text-align: center; }
+    .uploader .result-container {
+      height: 60vh;
+      width: 90vw; }
+      .uploader .result-container .url {
+        width: 100% !important; }
+      .uploader .result-container .copy-botton {
+        flex-shrink: 0; }
+      .uploader .result-container .function-line {
+        font-size: 0.8rem; }
+    .uploader .error-container {
+      height: 60vh;
+      width: 90vw; }
+      .uploader .error-container .tip {
+        width: 80%;
+        text-align: center; } }
 
 .hide {
   display: none !important; }

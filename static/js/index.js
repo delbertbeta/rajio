@@ -75,6 +75,9 @@ function hat(bits, base) {
         null
     ]
 
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
+
     let targetUpload = {}
 
     // Read localStorage
@@ -126,6 +129,7 @@ function hat(bits, base) {
     })
 
     cancelButton.addEventListener('click', () => {
+        source.cancel('Operation canceled by the user.');
         animateStatus(progressContainer, uploaderContainer);
     })
 
@@ -389,6 +393,7 @@ function hat(bits, base) {
     }
 
     function fileHandle(file) {
+        progressNumber.textContent = '0'
         if (file.size > data.maxFileSize) {
             changeError(uploaderContainer, 'File is larger than limit (' + data.prettiedMaxFileSize + ').')
         } else {
@@ -399,11 +404,12 @@ function hat(bits, base) {
 
             fileName.textContent = file.name
             total.textContent = filesize(file.size)
-
+            finished.textContent = filesize(0)
+            
             let progress = 0
             let origin = 0
             let interval = setInterval(() => {
-                let tempProgress = Math.round(progress / file.size)
+                let tempProgress = Math.round(progress / file.size * 100)
                 updateProgress(origin, tempProgress, 800)
                 finished.textContent = filesize(progress)
                 origin = tempProgress
@@ -414,7 +420,8 @@ function hat(bits, base) {
                 data: formData,
                 onUploadProgress: (e) => {
                     progress = e.loaded
-                }
+                },
+                cancelToken: source.token
             }).then(r => {
                 clearInterval(interval)
                 cancelProgress()
@@ -428,9 +435,14 @@ function hat(bits, base) {
                     animateStatus(progressContainer, resultContainer)
                 }, 1000)
             }).catch(e => {
-                setTimeout(() => {
-                    changeError(progressContainer, 'Network Error.')
-                }, 1000)
+                clearInterval(interval)
+                if (axios.isCancel(e)) {
+                    console.log('Request canceled', e.message);
+                } else {
+                    setTimeout(() => {
+                        changeError(progressContainer, 'Network Error.')
+                    }, 1000)
+                }
             })
         }
     }
@@ -467,7 +479,7 @@ function hat(bits, base) {
         uploads.forEach((v, i) => {
             const tr = document.createElement('tr')
             tr.innerHTML = `
-            <td>${v.fileName}</td>
+            <td><a href="${data.domain}/s/${v.downloadCode}" style="color: #0080db" target="_blank">${v.fileName}</a></td>
             <td><span>${v.downloadCount}</span>/<span class="choices" data-index="${i}"><span>${v.downloadLimit === null ? 'unlimited' : v.downloadLimit}</span><span><svg width="16" height="16"><polygon points="4 9 8.5 14 13 9" fill="#0080db"></polygon></svg></span></span></td>
             <td><span>${moment(v.uploadTime).format('YYYY-MM-DD HH:mm')}</span>/<span class="choices" data-index="${i}"><span>${v.timeLimit === null ? 'unlimited' : moment(v.timeLimit).format('YYYY-MM-DD HH:mm')}</span><span><svg width="16" height="16"><polygon points="4 9 8.5 14 13 9" fill="#0080db"></polygon></svg></span></span></td></td>
             <td><i class="material-icons" data-index="${i}" style="color: #e05b62">close</i></td>

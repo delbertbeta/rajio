@@ -1,0 +1,41 @@
+@media(max-width: 500px){
+  .header {
+    height: 4rem;
+    padding: 1rem 5%;
+    .header-icon {
+      font-size: 2rem;
+    }
+    .header-title {
+      font-size: 2rem;
+    }
+    .header-expaination {
+      font-size: 1rem;
+    }
+    .history-entry {
+      bottom: 0.5rem;
+    }
+  }
+  
+  .history-panel {
+    height: 60vh;
+    width: 95vw;
+    top: 8vh;
+    left: 2.5vw;
+    .renew-button {
+      margin-top: 6px;
+    }
+    .table-wrapper::-webkit-scrollbar {
+      width: 2px;
+    }
+    .table-wrapper::-webkit-scrollbar-track {
+      border-radius: 2px;
+    }
+    .table-wrapper::-webkit-scrollbar-thumb {
+      border-radius: 2px;
+    }
+    .table-wrapper {
+      height: 51vh;
+      overflow-x: auto;
+    }
+  }
+}

@@ -22,13 +22,7 @@ const route = async (ctx) => {
     await forbiddenHandle(ctx)
     return
   }
-  if (item.downloadLimit !== null && item.downloadLimit <= item.downloadCount) {
-    await forbiddenHandle(ctx)
-    return
-  } else {
-    item.downloadCount++
-    await item.save()
-  }
+  
   const now = moment()
   const limit = moment(item.timeLimit)
   if (item.timeLimit !== null && now.isAfter(limit, 'second')) {
@@ -36,6 +30,14 @@ const route = async (ctx) => {
     return
   }
 
+  if (item.downloadLimit !== null && item.downloadLimit <= item.downloadCount) {
+    await forbiddenHandle(ctx)
+    return
+  } else {
+    item.downloadCount++
+    await item.save()
+  }
+  
   ctx.response.attachment(item.fileName)
   const stream = await fs.createReadStream(`data/upload/${item.id}`)
   ctx.response.body = stream

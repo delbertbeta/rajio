@@ -16,6 +16,13 @@ html {
     overflow: hidden;
 }
 
+@media (max-width: 500px) {
+    html {
+        background-size: 14rem;
+        background-position: bottom 1rem right 1rem;
+    }
+}
+
 body {
     margin: 0;
     min-width: 100%;
@@ -72,8 +79,11 @@ body {
 }
 
 @import 'header';
+@import 'header_mobile';
 @import 'footer';
+@import 'footer_mobile';
 @import 'uploader';
+@import 'uploader_mobile';
 
 
 .hide {
