@@ -7,11 +7,12 @@ const share = require('./share')
 const deleteHandle = require('./delete')
 const update = require('./update')
 const refresh = require('./refresh')
+const status = require('./status')
 
 router.get('/', index)
+router.get('/status', status)
 
-router.post('/api/upload', upload.koaBody, upload.route);
-// router.get('/s/:id')
+router.post('/api/upload', upload.koaBody, upload.route)
 
 router.param('id', (id, ctx, next) => {
   ctx.id = id

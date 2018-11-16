@@ -15,7 +15,7 @@ const getTotalCount = async () => {
 }
 
 const getRecent = async () => {
-  const result = await sequelize.rajioInfo.find({
+  const result = await sequelize.rajioInfo.findAll({
     limit: 7
   })
   return result

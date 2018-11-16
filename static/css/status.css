@@ -178,127 +178,70 @@ a:active {
 
 html {
   width: 100%;
-  height: 100%;
   background-image: url(/static/img/texture.png);
   background-size: 20rem;
   background-repeat: no-repeat;
   background-position: bottom 5% right 5%;
-  font-family: sans-serif;
-  overflow: hidden; }
+  font-family: sans-serif; }
 
 body {
   margin: 0;
-  min-width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; }
+  min-width: 100%; }
 
 .hide {
   display: none !important; }
 
-.uploader {
+.info-text-wrapper {
+  color: #353535;
+  margin-top: 20px;
+  width: 60vw;
+  margin-left: 20vw;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 5vh;
-  transform-style: preserve-3d;
-  perspective: 1000px; }
-  .uploader .download-container {
-    position: relative;
-    display: block;
-    height: 60vh;
-    width: 60vw;
-    transition: all 0.2s ease; }
-    .uploader .download-container .inner-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      height: 100%; }
-      .uploader .download-container .inner-container .title {
-        font-weight: 200;
-        font-size: 32px;
-        color: #353535;
-        text-align: center; }
-      .uploader .download-container .inner-container .explanation {
-        width: 60%;
-        margin-top: 12px;
-        font-size: 16px;
-        color: #505050;
-        text-align: center; }
-      .uploader .download-container .inner-container .url {
-        overflow: hidden;
-        height: 3rem;
-        width: 500px;
-        border-radius: 6px;
-        border: 1px solid #0080db;
-        display: flex;
-        justify-content: space-between;
-        margin-top: 1.2rem; }
-        .uploader .download-container .inner-container .url .url-box {
-          display: inline-block;
-          width: 400px;
-          height: 100%;
-          border: none;
-          color: #6a6a6a;
-          padding-left: 10px;
-          padding-right: 10px;
-          font-size: 1rem;
-          font-family: sans-serif;
-          font-weight: 300; }
-        .uploader .download-container .inner-container .url .copy-botton {
-          display: inline-block;
-          height: 100%;
-          width: 100px;
-          background-color: #0080db;
-          color: white;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          cursor: pointer;
-          transition: background-color 0.5s ease; }
-        .uploader .download-container .inner-container .url .copy-botton:hover {
-          background-color: #3e9bdd; }
-      .uploader .download-container .inner-container .not-found {
-        margin-top: 32px;
-        height: 220px;
-        width: 220px; }
-      .uploader .download-container .inner-container .download {
-        height: 160px;
-        width: 160px; }
-      .uploader .download-container .inner-container .go-back-button {
-        margin-top: 1.2rem;
-        height: 3.6rem;
-        width: 16rem;
-        background-color: #0080db;
-        border-radius: 6px;
-        font-size: 1.2rem;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        margin-bottom: 0.5rem;
-        transition: background-color 0.2s ease; }
-      .uploader .download-container .inner-container .go-back-button:hover {
-        background-color: #3e9bdd; }
+  justify-content: space-around; }
+  .info-text-wrapper .info-text {
+    width: 33%; }
+    .info-text-wrapper .info-text .title {
+      font-weight: 200;
+      font-size: 24px; }
+    .info-text-wrapper .info-text .text {
+      margin-top: 8px;
+      font-size: 18px;
+      color: #888; }
+    .info-text-wrapper .info-text .graph {
+      position: relative;
+      margin-top: 4px;
+      height: 4px;
+      width: 100%;
+      background-color: #eeeeee;
+      border-radius: 2px;
+      overflow: hidden; }
+      .info-text-wrapper .info-text .graph .graph-inner {
+        height: 4px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        border-radius: 2px;
+        width: 0%;
+        transition: width 1s ease;
+        background-color: #888; }
+
+.chart-wrapper {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center; }
+  .chart-wrapper .chart {
+    height: 400px;
+    width: 800px; }
 
 @media (max-width: 500px) {
   html {
     background-size: 14rem;
     background-position: bottom 1rem right 1rem; }
-  .download-container {
-    height: 70vh !important;
-    width: 90vw !important; }
-    .download-container .title {
-      font-size: 26px !important; }
-    .download-container .explanation {
-      width: 90% !important; }
-    .download-container .url {
-      width: 100% !important; }
-    .download-container .download {
-      height: 120px !important;
-      width: 120px !important; }
-    .download-container .copy-botton {
-      flex-shrink: 0; } }
+  .info-text-wrapper {
+    width: 80vw;
+    margin-left: 10vw;
+    flex-wrap: wrap; }
+    .info-text-wrapper .info-text {
+      font-size: 18px;
+      margin-bottom: 16px;
+      width: 100%; } }
