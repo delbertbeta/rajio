@@ -53,4 +53,20 @@ const rajio = sequelize.define('rajio', {
     }
 })
 
-module.exports = rajio;
+const rajioInfo = sequelize.define('rajio_info', {
+    date: {
+        type: Sequelize.DATEONLY,
+        primaryKey: true,
+        unique: true,
+        defaultValue: Sequelize.NOW
+    },
+    count: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+    }
+})
+
+module.exports = {
+    rajio: rajio,
+    rajioInfo: rajioInfo
+}

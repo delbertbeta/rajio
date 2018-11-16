@@ -6,7 +6,7 @@ const path = require('path')
 const Op = require('sequelize').Op
 
 const garbageCollection = async () => {
-  const garbages = await sequelize.findAll({
+  const garbages = await sequelize.rajio.findAll({
     where: {
       [Op.and]: {
         [Op.or]: {

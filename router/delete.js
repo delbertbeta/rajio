@@ -2,7 +2,7 @@ const sequelize = require('../tool/sequelize')
 const gc = require('../tool/gc')
 
 const route = async function (ctx, next) {
-  const item = await sequelize.findOne({
+  const item = await sequelize.rajio.findOne({
     where: {
       id: ctx.id
     }

@@ -3,7 +3,7 @@ const prettyBytes = require('pretty-bytes')
 const moment = require('moment')
 
 module.exports = async (ctx) => {
-  const item = await sequelize.findOne({
+  const item = await sequelize.rajio.findOne({
     where: {
       downloadCode: ctx.code
     }

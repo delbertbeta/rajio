@@ -117,7 +117,7 @@ body {
   z-index: 2;
   padding: 1rem;
   box-sizing: border-box;
-  overflow-y: auto; }
+  overflow: hidden; }
   .history-panel .renew-button {
     display: flex;
     justify-content: center;

@@ -64,7 +64,7 @@
     z-index: 2;
     padding: 1rem;
     box-sizing: border-box;
-    overflow-y: auto;
+    overflow: hidden;
     .renew-button {
         display: flex;
         justify-content: center;

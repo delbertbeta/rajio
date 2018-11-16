@@ -23,7 +23,7 @@ const route = async function (ctx) {
             message: 'Identifier is needed.'
         }
     } else {
-        const data = await sequelize.create({
+        const data = await sequelize.rajio.create({
             id: ctx.request.files.file.path.split('/').pop(),
             downloadCount: 0,
             downloadLimit: null,

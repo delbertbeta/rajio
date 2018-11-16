@@ -20,7 +20,7 @@ const timeLimit = [
 const koaBodyRoute = koaBody()
 
 const route = async function (ctx, next) {
-  const item = await sequelize.findOne({
+  const item = await sequelize.rajio.findOne({
     where: {
       id: ctx.id
     }

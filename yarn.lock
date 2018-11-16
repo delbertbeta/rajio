@@ -464,6 +464,13 @@ dicer@0.2.5:
     readable-stream "1.1.x"
     streamsearch "0.1.2"
 
+diskusage@^0.2.6:
+  version "0.2.6"
+  resolved "http://registry.npm.taobao.org/diskusage/download/diskusage-0.2.6.tgz#1f90b5c2489359146848a0369777115b3d08b594"
+  integrity sha1-H5C1wkiTWRRoSKA2l3cRWz0ItZQ=
+  dependencies:
+    nan "^2.11.1"
+
 dottie@^2.0.0:
   version "2.0.1"
   resolved "http://registry.npm.taobao.org/dottie/download/dottie-2.0.1.tgz#697ad9d72004db7574d21f892466a3c285893659"
@@ -1380,7 +1387,7 @@ mz@^2.3.1, mz@^2.4.0, mz@^2.6.0, mz@^2.7.0:
     object-assign "^4.0.1"
     thenify-all "^1.0.0"
 
-nan@^2.10.0:
+nan@^2.10.0, nan@^2.11.1:
   version "2.11.1"
   resolved "http://registry.npm.taobao.org/nan/download/nan-2.11.1.tgz#90e22bccb8ca57ea4cd37cc83d3819b52eea6766"
   integrity sha1-kOIrzLjKV+pM03zIPTgZtS7qZ2Y=

@@ -1,5 +1,6 @@
 const logger = require('../tool/log4js')
 const sequelize = require('../tool/sequelize')
+const Sequelize = require('sequelize')
 const fs = require('fs-extra')
 const moment = require('moment')
 
@@ -13,7 +14,7 @@ const forbiddenHandle = async (ctx) => {
 
 const route = async (ctx) => {
   const id = ctx.id
-  const item = await sequelize.findOne({
+  const item = await sequelize.rajio.findOne({
     where: {
       id: id
     }
@@ -34,8 +35,12 @@ const route = async (ctx) => {
     await forbiddenHandle(ctx)
     return
   } else {
-    item.downloadCount++
-    await item.save()
+    sequelize.rajioInfo.increment('count', {
+      where: {
+        date: now.format('YYYY-MM-DD')
+      }
+    })
+    item.increment('downloadCount')
   }
   
   ctx.response.attachment(item.fileName)

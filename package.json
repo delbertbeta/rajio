@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/delbertbeta/rajio#readme",
   "dependencies": {
+    "diskusage": "^0.2.6",
     "ejs": "^2.6.1",
     "fs-extra": "^7.0.1",
     "hat": "^0.0.3",
