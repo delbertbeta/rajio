@@ -20,7 +20,10 @@ const route = async function (ctx, next) {
           null
         ]
       }
-    }
+    },
+    order: [
+      ['uploadTime', 'DESC']
+    ]
   })
   ctx.response.body = items
 }
