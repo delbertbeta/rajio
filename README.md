@@ -1,8 +1,8 @@
 # rajio
 
-## Introduction
+Rajio is an anonymous file/text sharing platform on web, focusing on lightweight and easy-deploy. :ghost:
 
-Rajio is an anonymous file/text sharing platform on web, focusing on lightweight and easy-deploy.
+## Introduction
 
 Just similar to [Firefox Send](https://send.firefox.com/), Rajio gives you a space to upload file or text without login and your privacy. **Rajio will not encrypt your file on the server, which is different from Firefox Send**. After uploading, you can share it with your friends by urls or QRCode.
 
@@ -29,6 +29,57 @@ Just test it on [https://rajio.delbertbeta.cc](https://rajio.delbertbeta.cc)
 ![rajio_3](https://rajio.delbertbeta.cc/d/b636346b8cb322832611795a3632fc0f/rajio_3.png)
 ![rajio_4](https://rajio.delbertbeta.cc/d/3ced93e38c696ee6efbf343a41b455d4/rajio_4.png)
 ![rajio_5](https://rajio.delbertbeta.cc/d/296db6ec148bbc50b532e8567ef2610b/rajio_5.png)
+
+## Install
+
+1. Install Node
+
+Rajio are tested on `nodejs >= 8.9.0`, if you don't have node installed, visit https://nodejs.org for help.
+
+2. Install yarn
+
+Rajio uses `yarn` for package management, to install `yarn`:
+
+```bash
+npm install -g yarn
+```
+
+3. Clone the code
+
+Choose a place to clone the code.
+
+```bash
+git clone https://github.com/delbertbeta/rajio.git
+cd rajio
+```
+
+4. Install dependencies
+
+Yarn will do everything for you:
+
+```
+yarn
+```
+
+5. Configure rajio
+
+Edit `config.js` for domain, maxFileSize, etc.
+
+6. Start app.js
+
+You can use `pm2` or `forever` to monitor the process of node, or just simply type
+
+```
+node app.js
+```
+
+Now the application is running on port `4290`, to modify this, edit `app.js`
+
+7. (Optional) Configure your http server for proxy
+
+If you are running `nginx` or `apache`, you may want to configure reserve proxy for Rajio. Visit their documents for help.
+
+Now you have finished the installtion of Rajio. :tada::tada:
 
 ## License
 
