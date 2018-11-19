@@ -8,15 +8,15 @@ const route = async function (ctx, next) {
       deleted: {
         [Op.not]: true
       },
-      downloadCount: {
+      downloadLimit: {
         [Op.or]: [
           null,
-          {[Op.lt]: 'downloadLimit'},
+          {[Op.gt]: 'downloadCount'},
         ]
       },
       timeLimit: {
         [Op.or]: [
-          {[Op.gt]: new Date()},
+          {[Op.gte]: new Date()},
           null
         ]
       }

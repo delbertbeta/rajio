@@ -2,24 +2,23 @@ const cron = require('node-cron')
 const sequelize = require('../tool/sequelize')
 const fs = require('fs-extra')
 const path = require('path')
+const Sequelize = require('sequelize')
 
 const Op = require('sequelize').Op
 
 const garbageCollection = async () => {
   const garbages = await sequelize.rajio.findAll({
     where: {
-      [Op.and]: {
-        [Op.or]: {
-          "downloadCount": {
-            [Op.gte]: 'downloadLimit'
-          },
-          "timeLimit": {
-            [Op.lte]: new Date()
-          }
+      [Op.or]: {
+        "downloadCount": {
+          [Op.gte]: Sequelize.col('downloadLimit')
         },
-        "deleted": {
-          [Op.not]: true
-        },
+        "timeLimit": {
+          [Op.lte]: new Date()
+        }
+      },
+      "deleted": {
+        [Op.not]: true
       }
     }
   })

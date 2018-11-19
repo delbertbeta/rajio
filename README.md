@@ -22,6 +22,8 @@ Just test it on [https://rajio.delbertbeta.cc](https://rajio.delbertbeta.cc)
 * No login and privacy is needed
 * One-key renew identifier and wipe history
 
+[Change Log](https://github.com/delbertbeta/rajio/blob/master/ChangeLog.md)
+
 ## Screenshot
 
 ![rajio_1](https://rajio.delbertbeta.cc/d/bf031250b96360e9c213561066c3bd05/rajio_1.png)

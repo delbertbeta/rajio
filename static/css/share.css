@@ -1,0 +1,304 @@
+.footer {
+  width: 100%;
+  height: 8rem;
+  padding: 2rem 5%;
+  box-sizing: border-box;
+  position: relative; }
+  .footer .footer-text {
+    color: #6a6a6a;
+    font-size: 0.8rem;
+    vertical-align: middle; }
+    .footer .footer-text a {
+      color: inherit;
+      text-decoration: underline; }
+    .footer .footer-text .red-icon {
+      color: #ff7373;
+      vertical-align: top; }
+
+.header {
+  width: 100%;
+  height: 8rem;
+  padding: 2rem 5%;
+  box-sizing: border-box;
+  position: relative; }
+  .header .header-icon {
+    vertical-align: middle;
+    font-size: 4rem;
+    color: #6a6a6a; }
+  .header .header-title {
+    vertical-align: middle;
+    font-size: 4rem;
+    color: #6a6a6a; }
+  .header .header-expaination {
+    display: inline-block;
+    position: relative;
+    vertical-align: bottom;
+    margin-bottom: 0.5rem;
+    margin-left: 0.5rem;
+    font-size: 1.5rem;
+    color: #838383;
+    font-weight: 300; }
+  .header .history-entry {
+    position: absolute;
+    display: flex;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0);
+    height: 2.5rem;
+    width: 2.5rem;
+    transition: background-color 0.2s ease;
+    justify-content: center;
+    align-items: center;
+    right: 5%;
+    bottom: 1.5rem;
+    color: #6a6a6a;
+    cursor: pointer; }
+    .header .history-entry i {
+      font-size: 2rem; }
+  .header .history-entry:hover {
+    background-color: rgba(0, 0, 0, 0.1); }
+
+.history-panel {
+  position: fixed;
+  height: 50vh;
+  width: 720px;
+  right: 5%;
+  top: 7rem;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0 0px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  z-index: 2;
+  padding: 1rem;
+  box-sizing: border-box;
+  overflow: hidden; }
+  .history-panel .renew-button {
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    .history-panel .renew-button div {
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      transition: background-color 0.2s ease;
+      border-radius: 4px; }
+    .history-panel .renew-button div:hover {
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.1); }
+  .history-panel i {
+    cursor: pointer; }
+  .history-panel .table-wrapper::-webkit-scrollbar-track {
+    border-radius: 4px;
+    background-color: #F5F5F5; }
+  .history-panel .table-wrapper::-webkit-scrollbar {
+    width: 8px;
+    background-color: #F5F5F5; }
+  .history-panel .table-wrapper::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #555; }
+  .history-panel .table-wrapper {
+    width: 100%;
+    height: 43vh;
+    overflow-x: hidden;
+    overflow-y: auto; }
+    .history-panel .table-wrapper table {
+      width: 100%;
+      table-layout: fixed;
+      overflow-y: auto; }
+      .history-panel .table-wrapper table tr {
+        font-weight: 300;
+        position: relative;
+        height: 2rem; }
+        .history-panel .table-wrapper table tr th {
+          font-weight: normal; }
+        .history-panel .table-wrapper table tr th:first-child {
+          text-align: left; }
+        .history-panel .table-wrapper table tr td:first-child {
+          text-align: left;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis; }
+        .history-panel .table-wrapper table tr td {
+          text-align: center; }
+          .history-panel .table-wrapper table tr td i {
+            color: #6a6a6a; }
+      .history-panel .table-wrapper table tr:first-child {
+        color: #6a6a6a;
+        border-bottom: 1px solid #838383; }
+  .history-panel .empty-tip {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    color: #6a6a6a; }
+
+@media (max-width: 500px) {
+  .footer {
+    height: 4rem;
+    padding: 1rem 1rem;
+    margin-bottom: 1rem; } }
+
+@media (max-width: 500px) {
+  .header {
+    height: 4rem;
+    padding: 1rem 5%; }
+    .header .header-icon {
+      font-size: 2rem; }
+    .header .header-title {
+      font-size: 2rem; }
+    .header .header-expaination {
+      font-size: 1rem; }
+    .header .history-entry {
+      bottom: 0.5rem; }
+  .history-panel {
+    height: 60vh;
+    width: 95vw;
+    top: 8vh;
+    left: 2.5vw; }
+    .history-panel .renew-button {
+      margin-top: 6px; }
+    .history-panel .table-wrapper::-webkit-scrollbar {
+      width: 2px; }
+    .history-panel .table-wrapper::-webkit-scrollbar-track {
+      border-radius: 2px; }
+    .history-panel .table-wrapper::-webkit-scrollbar-thumb {
+      border-radius: 2px; }
+    .history-panel .table-wrapper {
+      height: 51vh;
+      overflow-x: auto; } }
+
+a:hover,
+a:visited,
+a:link,
+a:active {
+  text-decoration: none; }
+
+html {
+  width: 100%;
+  height: 100%;
+  background-image: url(/static/img/texture.png);
+  background-size: 20rem;
+  background-repeat: no-repeat;
+  background-position: bottom 5% right 5%;
+  font-family: sans-serif;
+  overflow: hidden; }
+
+body {
+  margin: 0;
+  min-width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
+
+.hide {
+  display: none !important; }
+
+.uploader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 5vh;
+  transform-style: preserve-3d;
+  perspective: 1000px; }
+  .uploader .download-container {
+    position: relative;
+    display: block;
+    height: 60vh;
+    width: 60vw;
+    transition: all 0.2s ease; }
+    .uploader .download-container .inner-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100%; }
+      .uploader .download-container .inner-container .title {
+        font-weight: 200;
+        font-size: 32px;
+        color: #353535;
+        text-align: center; }
+      .uploader .download-container .inner-container .explanation {
+        width: 60%;
+        margin-top: 12px;
+        font-size: 16px;
+        color: #505050;
+        text-align: center; }
+      .uploader .download-container .inner-container .url {
+        overflow: hidden;
+        height: 3rem;
+        width: 500px;
+        border-radius: 6px;
+        border: 1px solid #0080db;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1.2rem; }
+        .uploader .download-container .inner-container .url .url-box {
+          display: inline-block;
+          width: 400px;
+          height: 100%;
+          border: none;
+          color: #6a6a6a;
+          padding-left: 10px;
+          padding-right: 10px;
+          font-size: 1rem;
+          font-family: sans-serif;
+          font-weight: 300; }
+        .uploader .download-container .inner-container .url .copy-botton {
+          display: inline-block;
+          height: 100%;
+          width: 100px;
+          background-color: #0080db;
+          color: white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          transition: background-color 0.5s ease; }
+        .uploader .download-container .inner-container .url .copy-botton:hover {
+          background-color: #3e9bdd; }
+      .uploader .download-container .inner-container .not-found {
+        margin-top: 32px;
+        height: 220px;
+        width: 220px; }
+      .uploader .download-container .inner-container .download {
+        height: 160px;
+        width: 160px; }
+      .uploader .download-container .inner-container .go-back-button {
+        margin-top: 1.2rem;
+        height: 3.6rem;
+        width: 16rem;
+        background-color: #0080db;
+        border-radius: 6px;
+        font-size: 1.2rem;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        margin-bottom: 0.5rem;
+        transition: background-color 0.2s ease; }
+      .uploader .download-container .inner-container .go-back-button:hover {
+        background-color: #3e9bdd; }
+
+@media (max-width: 500px) {
+  html {
+    background-size: 14rem;
+    background-position: bottom 1rem right 1rem; }
+  .download-container {
+    height: 70vh !important;
+    width: 90vw !important; }
+    .download-container .title {
+      font-size: 26px !important; }
+    .download-container .explanation {
+      width: 90% !important; }
+    .download-container .url {
+      width: 100% !important; }
+    .download-container .download {
+      height: 120px !important;
+      width: 120px !important; }
+    .download-container .copy-botton {
+      flex-shrink: 0; } }
