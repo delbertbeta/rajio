@@ -4,6 +4,7 @@ const sequelize = require('../tool/sequelize');
 const hat = require('hat');
 const koaBody = require('koa-body');
 const path = require('path')
+const moment = require('moment')
 
 let koaBodyFunc = koaBody({
     multipart: true,
@@ -27,7 +28,7 @@ const route = async function (ctx) {
             id: ctx.request.files.file.path.split('/').pop(),
             downloadCount: 0,
             downloadLimit: null,
-            timeLimit: null,
+            timeLimit: moment().add(1, 'day').toDate(),
             downloadCode: hat(24, 16),
             fileSize: ctx.request.files.file.size,
             fileName: ctx.request.files.file.name,

@@ -161,7 +161,7 @@ function hat(bits, base) {
                 refreshHistory()
                 let resultStr = ''
                 if (r.data.timeLimit === null) {
-                    resultStr = 'unlimited'
+                    resultStr = 'unlimited days'
                 } else {
                     resultStr = moment(r.data.timeLimit).format('YYYY-MM-DD HH:mm')
                 }
@@ -430,6 +430,7 @@ function hat(bits, base) {
                 showResult(r.data)
                 uploads.splice(0, 0, r.data)
                 targetUpload = r.data
+                dayChoice.textContent = moment(r.data.timeLimit).format('YYYY-MM-DD HH:mm')
                 refreshHistory()
                 setTimeout(() => {
                     animateStatus(progressContainer, resultContainer)

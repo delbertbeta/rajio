@@ -10,7 +10,7 @@ Bug fix:
 
 Change:
 
-* 
+* After uploading a file, the default time limie will be set to 1 day.
 
 ## 1.0 (2018-11-16)
 
