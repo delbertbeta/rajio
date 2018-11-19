@@ -430,7 +430,7 @@ function hat(bits, base) {
                 showResult(r.data)
                 uploads.splice(0, 0, r.data)
                 targetUpload = r.data
-                dayChoice.textContent = moment(r.data.timeLimit).format('YYYY-MM-DD HH:mm')
+                dayChoice.children[0].textContent = moment(r.data.timeLimit).format('YYYY-MM-DD HH:mm')
                 refreshHistory()
                 setTimeout(() => {
                     animateStatus(progressContainer, resultContainer)
