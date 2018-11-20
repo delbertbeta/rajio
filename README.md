@@ -9,7 +9,7 @@ Just similar to [Firefox Send](https://send.firefox.com/), Rajio gives you a spa
 Rajio generate and storage your identifier token for your uploaded files locally. You can wipe your history and hide yourself by renew a indentifier token. We will not store any data about the relationship between specific people and identifier.
 
 The original intention of rajio is only to find an easy way to transfer a file from my PC to my phones without any other software installed.
-
+ 
 Just test it on [https://rajio.delbertbeta.cc](https://rajio.delbertbeta.cc)
 
 ## Features
@@ -31,6 +31,59 @@ Just test it on [https://rajio.delbertbeta.cc](https://rajio.delbertbeta.cc)
 ![rajio_3](https://rajio.delbertbeta.cc/d/b636346b8cb322832611795a3632fc0f/rajio_3.png)
 ![rajio_4](https://rajio.delbertbeta.cc/d/3ced93e38c696ee6efbf343a41b455d4/rajio_4.png)
 ![rajio_5](https://rajio.delbertbeta.cc/d/296db6ec148bbc50b532e8567ef2610b/rajio_5.png)
+
+## Command-Line Tools
+
+* local
+
+`local` is a tool to share your exist file on server to others. This tool creates symbolic link of the file to the upload folder and creates item in database so rajio can serve it. 
+
+**Delete file created by `local` will not delete your orginal file.** 
+
+```
+Usage: local [options]
+
+Options:
+  -v, --version                output the version number
+  -l, --local-file <path>      Specific a local file to share
+  -i, --identifier <string>    Specific a identifier (Optional)
+  -t, --time-limit <datetime>  Limit the time (Optional)
+  -d, --download-limit <n>     Limit the download count (Optional)
+  -h, --help                   output usage information
+```
+
+Speicific your identifier to manage this file in your history panel on web. To get identifier of your session, run
+
+```javascript
+localStorage["identifier"]
+``` 
+
+in your browser's devtool with rajio open.
+
+Example:
+
+```bash
+node ./cmd/local.js -l ~/rajio/config.js -i ec4627b7c2883ba0ee17a78087ff9e2e -d 10 -t "2018-11-21 00:00"
+```
+
+Return:
+
+```javascript
+{
+  uploadTime: '2018-11-19T16:25:15.567Z',
+  deleted: false,
+  id: '3054632c0cf151d42e083072c6ae7c29',
+  downloadCount: 0,
+  downloadLimit: 10,
+  timeLimit: '2018-11-20T16:00:00.000Z',
+  downloadCode: '823ef3',
+  fileSize: 106,
+  fileName: 'config.js',
+  identifier: 'ec4627b7c2883ba0ee17a78087ff9e2e',
+  updatedAt: '2018-11-19T16:25:15.569Z',
+  createdAt: '2018-11-19T16:25:15.569Z'
+}
+```
 
 ## Install
 
