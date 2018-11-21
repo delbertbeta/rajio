@@ -20,6 +20,8 @@ html {
     html {
         background-size: 14rem;
         background-position: bottom 1rem right 1rem;
+        overflow: auto;
+        min-height: 600px;
     }
 }
 
