@@ -87,6 +87,35 @@
             .upload-button:hover {
                 background-color: #3e9bdd;
             }
+            .download-code-wrapper {
+                margin-top: 48px;
+                // input, i {
+                //     vertical-align: middle;
+                // }
+
+                input {
+                    font-size: 18px;
+                    outline: none;
+                    border: none;
+                    padding-left: 6px;
+                    text-align: center;
+                    width: 160px;
+                    padding-bottom: 4px;
+                    border-bottom: 2px solid #aaaaaa;
+                    transition: border-bottom 0.2s ease;
+                }
+
+                input:focus {
+                    border-bottom: 2px solid #3e9bdd;
+                }
+
+                i {
+                    cursor: pointer;
+                    font-size: 28px;
+                    color: #6a6a6a;
+                    vertical-align: middle;
+                }
+            }
         }
         .uploader-text-container {
             width: 100%;
@@ -211,7 +240,7 @@
     .result-container {
         position: relative;
         display: block;
-        height: 60vh;
+        height: 68vh;
         width: 60vw;
         transition: all 0.2s ease;
         .inner-container {
@@ -226,7 +255,7 @@
             }
             .qrcode:hover {
                 box-shadow: 0 0px 10px rgba(0, 0, 0, 0.4);
-                transform: scale(1.2);
+                transform: scale(1.4);
             }
             .url {
                 overflow: hidden;
@@ -270,7 +299,7 @@
                 line-height: 1rem;
                 font-size: 1rem;
                 text-align: center;
-                margin: 1rem 0 2rem 0;
+                margin: 1rem 0 1rem 0;
             }
             .go-back-button {
                 height: 3.6rem;
@@ -295,6 +324,22 @@
                 color: #6a6a6a;
                 cursor: pointer;
             }
+            .download-code-wrapper {
+                color: #888888;
+                font-weight: 200;
+                background-color: rgba(0,0,0,0.02);
+                text-align: center;
+                padding: 8px 44px;
+                border-radius: 4px;
+                border: 1px solid #aaaa;
+                margin-top: 16px;
+                .download-code {
+                    font-weight: 700;
+                    font-size: 26px;
+                    color: #353535;
+                }
+            }
+
         }
     }
     .error-container {

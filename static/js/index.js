@@ -59,6 +59,9 @@ function hat(bits, base) {
     const historyEmpty = document.getElementById('historyEmpty')
     const historyTable = document.getElementById('historyTable')
     const renewButton = document.getElementById('renewButton')
+    const downloadCodeComfirm = document.getElementById('downloadCodeComfirm')
+    const downloadCodeInput = document.getElementById('downloadCodeInput')
+    const downloadCode = document.getElementById('downloadCode')
 
     const downloadLimit = [
         1, 5, 10, 20, 50, 100, 1000, null
@@ -235,6 +238,22 @@ function hat(bits, base) {
         uploads = []
         refreshHistory()
     })
+
+    downloadCodeInput.addEventListener('keydown', (e) => {
+        if (e.keyCode === 13) {
+            navigateToUrl(downloadCodeInput.value)
+        }
+    })
+
+    downloadCodeComfirm.addEventListener('click', () => {
+        navigateToUrl(downloadCodeInput.value)
+    })
+
+    function navigateToUrl(s) {
+        if (s.length > 0) {
+            window.open(`${data.domain}/s/${s}`)
+        }
+    }
 
     function animateStatus(from, to) {
         from.classList.remove('hide')
@@ -451,6 +470,7 @@ function hat(bits, base) {
     function showResult(res) {
         const url = `${data.domain}/s/${res.downloadCode}`
         urlBox.value = url
+        downloadCode.textContent = res.downloadCode
         const qr = qrcode(0, 'L')
         qr.addData(url)
         qr.make()
