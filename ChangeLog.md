@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.2 (Staging)
+
+New feature:
+
+* Added download from download code.
+
 ## 1.1 (2018-11-19)
 
 Bug fix:

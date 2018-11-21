@@ -24,7 +24,7 @@
       }
     }
     .result-container {
-      height: 60vh;
+      height: 70vh;
       width: 90vw;
       .url {
         width: 100% !important;
@@ -34,6 +34,15 @@
       }
       .function-line {
         font-size: 0.8rem;
+      }
+      .qrcode {
+        width: 120px !important;
+      }
+      .download-code-wrapper {
+        padding: 4px 32px !important;
+        .download-code {
+          font-size: 22px !important;
+        }
       }
     }
     .error-container {
