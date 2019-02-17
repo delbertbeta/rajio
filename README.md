@@ -134,7 +134,7 @@ Now the application is running on port `4290`, to modify this, edit `app.js`
 
 If you are running `nginx` or `apache`, you may want to configure reserve proxy for Rajio. Visit their documents for help.
 
-Now you have finished the installtion of Rajio. :tada::tada:
+Now you have finished the installation of Rajio. :tada::tada:
 
 ## License
 
